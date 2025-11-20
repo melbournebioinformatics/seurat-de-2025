@@ -25,7 +25,7 @@ exercises: 2
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-### Step 1. Load the packages and data
+## Step 1. Load the packages and data
 
 Today we'll be working with Seurat (a popular scRNA-seq analysis
 package). SeuratData will be used to load in the experimental data we're
@@ -120,7 +120,7 @@ When loading in seurat objects, we can have a look at what processing steps have
 
 :::::::::::::::::::::::::::::::::::
 
-### Step 2: Run QC, filter out low quality cells
+## Step 2: Run QC, filter out low quality cells
 
 Lets start by processing our data (run the standard seurat workflow
 steps including preprocessing and filtering).
@@ -264,7 +264,7 @@ ifnb.filtered[["RNA"]] <- split(ifnb.filtered[["RNA"]], f = ifnb.filtered$stim) 
 
 
 
-### Step 3: Before performing differential expression between the two conditions, let's assess whether we need to integrate our data
+## Step 3: Before performing differential expression between the two conditions, let's assess whether we need to integrate our data
 
 After filtering out low quality cells, we want to visualise our data to
 see how cells group by condition and if we need to perform batch-effect
@@ -358,7 +358,7 @@ from both conditions)?
 
 ::::
 
-### Step 4: Integrating our data using the harmony method
+## Step 4: Integrating our data using the harmony method
 
 Seurat v5 has made it really easy to test different integration methods
 quickly, let's use a really popular approach (harmony) first.
@@ -393,7 +393,7 @@ well
 
 
 
-### Step 5: Integrating our data using an alternative Seurat CCA
+## Step 5: Integrating our data using an alternative Seurat CCA
 method
 
 ``` {r}
@@ -430,7 +430,7 @@ What do you think of the integration results now?
 **Hint:** Also look at the PC1 and PC2 plots for each integration method.
 
 
-### Step 6: Perform standard clustering steps after integration
+## Step 6: Perform standard clustering steps after integration
 
 This step collapses individual control and treatment datasets together
 and needs to be done before differential expression analysis
