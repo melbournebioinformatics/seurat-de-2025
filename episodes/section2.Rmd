@@ -34,6 +34,8 @@ library(grid)
 library(metap)
 library(harmony)
 library(scuttle)
+library(SingleR)
+library(celldex)
 set.seed(4242) # Set Seed for Reproducibility
 
 load('data/ifnb.RData')
@@ -170,6 +172,40 @@ DimPlot(ifnb.filtered, reduction = "umap.cca",
 ```
 
 
+::::::::::::::::::::::::::::::::::::: challenge 
+Automated Cell Type Annotation
+
+:::::::::::::::::::::::: solution 
+
+```{r, message=FALSE, warning=FALSE}
+# Load reference data 
+# Blood & immune lineages
+ref.set <- celldex::BlueprintEncodeData()
+
+ifnb.v4 <- JoinLayers(ifnb.filtered)
+sce.ifnb.filtered <- as.SingleCellExperiment(ifnb.v4)
+sce.ifnb.filtered <- logNormCounts(sce.ifnb.filtered)
+
+pred.cnts <- SingleR(
+  test = sce.ifnb.filtered,
+  ref = ref.set,
+  labels = ref.set$label.main
+)
+
+lbls.keep <- table(pred.cnts$labels)>10
+# Add SingleR labels to Seurat metadata
+ifnb.filtered$SingleR.labels <- sce.ifnb.filtered$SingleR.labels
+ifnb.filtered$SingleR.labels <- ifelse(lbls.keep[pred.cnts$labels], pred.cnts$labels, 'Other')
+
+# Run UMAP (based on PCA)
+ifnb.filtered <- RunUMAP(ifnb.filtered, dims = 1:20)
+DimPlot(ifnb.filtered, reduction='umap', group.by='SingleR.labels')
+
+```
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::
 
 We'll now leverage these new identities to compare DEGs between our
 treatment groups
@@ -215,7 +251,7 @@ interpret sometimes (we'll learn how to make better and clearer custom
 heatmaps using the pheatmap package from our Seurat expression data
 later on).
 
-``` {r}
+``` {r,warning=FALSE,message=FALSE}
 ifnb.treatVsCtrl.markers <- readRDS(url("https://github.com/manveerchauhan/Seurat_DE_Workshop/raw/refs/heads/main/ifnb_stimVsCtrl_markers.rds"))
 
 top5 <- ifnb.treatVsCtrl.markers %>%
