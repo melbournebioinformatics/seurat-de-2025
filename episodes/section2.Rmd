@@ -66,9 +66,6 @@ ifnb.filtered <- JoinLayers(ifnb.filtered)
 ```
 
 
-
-## Section 2: Differential Gene Expression when dealing with two treatment conditions
-
 ``` {r}
 DimPlot(ifnb.filtered, reduction = "umap.cca", label = T)
 ```
@@ -79,7 +76,7 @@ DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "stim")
 ```
 
 
-### Step 1. Find Conserved Markers to label our celltypes
+## Step 1. Find Conserved Markers to label our celltypes
 
 ``` {r}
 ## Let's look at conserved markers in cluster 4 across our two conditions (compared to all other clusters)
@@ -130,7 +127,7 @@ DimPlot(ifnb.filtered, reduction = "umap.cca", label = T) +
 ```
 
 
-### Step 2: Set the identity of our clusters to the annotations provided
+## Step 2: Set the identity of our clusters to the annotations provided
 
 ``` {r}
 Idents(ifnb.filtered) <- ifnb.filtered@meta.data$seurat_annotations
@@ -153,7 +150,7 @@ detail in the Intro to scRNA-seq workshop material.
 ::::
 
 
-### Step 3: Find differentially expressed genes (DEGs) between our two conditions, using CD16 Mono cells as an example
+## Step 3: Find differentially expressed genes (DEGs) between our two conditions, using CD16 Mono cells as an example
 
 ``` {r}
 # Make another column in metadata showing what cells belong to each treatment group (This will make more sense in a bit)
@@ -184,7 +181,7 @@ head(treatment.response.CD16) # These are the genes that are upregulated in the 
 
 ```
 
-### Step 4: Lets plot conserved features vs DEGs between conditions
+## Step 4: Lets plot conserved features vs DEGs between conditions
 
 ``` {r}
 FeaturePlot(ifnb.filtered, reduction = 'umap.cca', 
@@ -193,7 +190,7 @@ FeaturePlot(ifnb.filtered, reduction = 'umap.cca',
 ```
 
 
-### Step 5: Create a Heatmap to visualise DEGs between our two conditions + cell types
+## Step 5: Create a Heatmap to visualise DEGs between our two conditions + cell types
 
 ``` {r, warning=FALSE,message=FALSE}
 # Find upregulated genes in each group (cell type and condition)
