@@ -391,10 +391,9 @@ well
 
 
 
-## Step 5: Integrating our data using an alternative Seurat CCA
-method
+## Step 5: Integrating our data using an alternative Seurat CCA method
 
-``` {r}
+``` {r, message=FALSE, warning=FALSE}
 ifnb.filtered <- IntegrateLayers(object = ifnb.filtered,
                                  method = CCAIntegration,
                                  orig.reduction = "pca", 

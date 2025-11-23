@@ -23,6 +23,13 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, echo=FALSE, warning=FALSE,message=FALSE}
+suppressMessages({
+  suppressWarnings({
+    
+# Fix Github limit
+library(future)
+future::plan("sequential")
+options(future.globals.maxSize = 5 * 1024^3)  
 
 library(Seurat)
 #library(SeuratData)
@@ -64,7 +71,8 @@ ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "integrated.cca", dims = 1:2
 ifnb.filtered <- FindNeighbors(ifnb.filtered, reduction = "integrated.cca", dims = 1:20)
 ifnb.filtered <- FindClusters(ifnb.filtered, resolution = 0.5)
 ifnb.filtered <- JoinLayers(ifnb.filtered)
-
+  })
+})
 ```
 
 
@@ -112,13 +120,13 @@ FeaturePlot(ifnb.filtered, reduction = "umap.cca",
 
 
 ``` {r}
-# I happen to know that the cells in cluster 3 are CD16 monocytes - lets rename this cluster
+# I happen to know that the cells in cluster 4 are CD16 monocytes - lets rename this cluster
 # Idents(ifnb.filtered) # Let's look at the identities of our cells at the moment
 ```
 
 
 ``` {r}
-ifnb.filtered <- RenameIdents(ifnb.filtered, '4' = 'CD16 Mono') # Let's rename cells in cluster 3 with a new cell type label
+ifnb.filtered <- RenameIdents(ifnb.filtered, '4' = 'CD16 Mono') # Let's rename cells in cluster 4 with a new cell type label
 # Idents(ifnb.filtered) # we can take a look at the cell identities again
 ```
 
@@ -150,27 +158,6 @@ methods can be a good starting point. This approach is discussed in more
 detail in the Intro to scRNA-seq workshop material.
 
 ::::
-
-
-## Step 3: Find differentially expressed genes (DEGs) between our two conditions, using CD16 Mono cells as an example
-
-``` {r}
-# Make another column in metadata showing what cells belong to each treatment group (This will make more sense in a bit)
-ifnb.filtered$celltype.and.stim <- paste0(ifnb.filtered$seurat_annotations, '_', ifnb.filtered$stim)
-# (ifnb.filtered@meta.data)
-
-Idents(ifnb.filtered) <- ifnb.filtered$celltype.and.stim
-
-DimPlot(ifnb.filtered, reduction = "umap.cca", label = T) # each cluster is now made up of two labels (control or stimulated)
-```
-
-
-
-``` {r}
-DimPlot(ifnb.filtered, reduction = "umap.cca", 
-        label = T, split.by = "stim") # Lets separate by condition to see what we've done a bit more clearly
-```
-
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 Automated Cell Type Annotation
@@ -206,6 +193,25 @@ DimPlot(ifnb.filtered, reduction='umap.cca', group.by='SingleR.labels',  label =
 :::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::
+
+## Step 3: Find differentially expressed genes (DEGs) between our two conditions, using CD16 Mono cells as an example
+
+``` {r}
+# Make another column in metadata showing what cells belong to each treatment group (This will make more sense in a bit)
+ifnb.filtered$celltype.and.stim <- paste0(ifnb.filtered$seurat_annotations, '_', ifnb.filtered$stim)
+# (ifnb.filtered@meta.data)
+
+Idents(ifnb.filtered) <- ifnb.filtered$celltype.and.stim
+
+DimPlot(ifnb.filtered, reduction = "umap.cca", label = T) # each cluster is now made up of two labels (control or stimulated)
+```
+
+
+
+``` {r}
+DimPlot(ifnb.filtered, reduction = "umap.cca", 
+        label = T, split.by = "stim") # Lets separate by condition to see what we've done a bit more clearly
+```
 
 We'll now leverage these new identities to compare DEGs between our
 treatment groups
