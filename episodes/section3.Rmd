@@ -77,7 +77,6 @@ treatment.response.CD16 <- FindMarkers(ifnb.filtered, ident.1 = 'CD16 Mono_STIM'
 
 ## Step 1: We need to import sample information for each cell from the original paper
 
-
 :::: discussion
 
 Have a look at the ifnb.filtered seurat metadata, can you
@@ -116,6 +115,7 @@ loadDonorMetadata <- function(seu.obj){
 }
 
 ifnb.filtered <- loadDonorMetadata(ifnb.filtered)
+#ifnb.filtered@meta.data
 ```
 
 ## Step 2: Aggregate our counts based on treatment group, cell-type, and donor id
@@ -127,7 +127,7 @@ differential expression algorithms like DESeq2. We can see this clearly
 when we have a look at the ifnb.pseudbulk.df we make in the following
 code block.
 
-``` {r, eval=FALSE}
+``` {r}
 ifnb.pseudobulk <- AggregateExpression(ifnb.filtered, assays = "RNA",
                                    group.by = c("stim", "donor_id", "seurat_annotations"),
                                    return.seurat = TRUE)
@@ -143,7 +143,7 @@ ifnb.pseudobulk.df <- AggregateExpression(ifnb.filtered, assays = "RNA",
 
 We can view the top rows here:
 
-```{r}
+```{r, eval=FALSE}
 
 head(ifnb.pseudobulk.df)
 
