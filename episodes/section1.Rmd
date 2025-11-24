@@ -58,6 +58,11 @@ set.seed(4242) # Set Seed for Reproducibility
 
 
 ``` {r, echo=FALSE,message=FALSE,warning=FALSE}
+# Fix Github limit
+library(future)
+future::plan("sequential")
+options(future.globals.maxSize = 5 * 1024^3)  
+
 library(Seurat)
 # library(SeuratData)
 library(tidyverse)

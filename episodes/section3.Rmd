@@ -26,7 +26,10 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, echo=FALSE, warning=FALSE,message=FALSE}
-
+# Fix Github limit
+library(future)
+future::plan("sequential")
+options(future.globals.maxSize = 5 * 1024^3)  
 
 library(Seurat)
 #library(SeuratData)
@@ -138,7 +141,6 @@ ifnb.pseudobulk.df <- AggregateExpression(ifnb.filtered, assays = "RNA",
                                           group.by = c("stim", "donor_id", "seurat_annotations")) %>% 
   as.data.frame()
 
-
 ```
 
 We can view the top rows here:
@@ -148,7 +150,6 @@ We can view the top rows here:
 head(ifnb.pseudobulk.df)
 
 ```
-
 
 
 ## Step 3: Perform Differential Expression using DESeq2
@@ -278,8 +279,6 @@ Visualise_Overlapping_DEGs <- function(pseudobulk.de,
 
 Let's use the helper functions above to plot and view the
 overlap/agreement between our pseudobulk versus single-cell approaches
-
- 
         
 ``` {r}
 merged_deg_data <- Merge_DEG_dataframes(pseudobulk.de = treatment.response.CD16.pseudo,
