@@ -5,10 +5,6 @@ title: Setup
 
 ## Data Sets
 
-
-/data/ifnb.RData
-
-
 :::: prereq
 
 Some knowledge of R and scRNA-seq analysis is assumed.
