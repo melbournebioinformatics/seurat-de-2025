@@ -6,13 +6,22 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- 
+- Why aggregate to pseudobulk instead of testing each cell?
+- How does donor act as the biological replicate in DESeq2?
+- When do pseudobulk and single-cell DE agree or disagree, and why (e.g., zero inflation, composition, variance models)?
+- What minimum sampling per group (cells per donor, donors per group) is sensible before aggregating?
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- 
+- Attach donor IDs to cells and create pseudobulk matrices with AggregateExpression().
+- Run DESeq2 from Seurat via FindMarkers(test.use="DESeq2") on pseudobulk objects.
+- Inspect and interpret key outputs (adjusted p-values, log2FC) and compare to single-cell DE.
+- Visualize consensus/unique DEGs and make a publication-ready heatmap with pheatmap.
+- Recognize pitfalls (uneven donor coverage, tiny groups, composition shifts) and report limitations.
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -20,7 +29,7 @@ exercises: 2
 
 
 library(Seurat)
-#Slibrary(SeuratData)
+#library(SeuratData)
 library(tidyverse)
 library(DESeq2)
 library(patchwork)
@@ -66,9 +75,7 @@ treatment.response.CD16 <- FindMarkers(ifnb.filtered, ident.1 = 'CD16 Mono_STIM'
 
 ```
 
-## Section 3 : Differential Expression using a pseudobulk approach and DESeq2
-
-### Step 1: We need to import sample information for each cell from the original paper
+## Step 1: We need to import sample information for each cell from the original paper
 
 
 :::: discussion
@@ -111,7 +118,7 @@ loadDonorMetadata <- function(seu.obj){
 ifnb.filtered <- loadDonorMetadata(ifnb.filtered)
 ```
 
-### Step 2: Aggregate our counts based on treatment group, cell-type, and donor id
+## Step 2: Aggregate our counts based on treatment group, cell-type, and donor id
 
 Collapsing our single-cell matrix in this manner is referred to as
 creating a 'pseudo-bulk' count matrix.. We're making a condensed count
@@ -144,7 +151,7 @@ head(ifnb.pseudobulk.df)
 
 
 
-### Step 3: Perform Differential Expression using DESeq2
+## Step 3: Perform Differential Expression using DESeq2
 
 Just like before, lets make a new column containing the cell type and
 treatment group before DE with DESeq2. We do this so that we can
@@ -185,7 +192,7 @@ head(Cells(ifnb.pseudobulk)) # our 'cells' are no longer barcodes, but have been
 
 ```
 
-### Step 4: Assessing differences between our pseudbulk DEGs and single-cell DEGs
+## Step 4: Assessing differences between our pseudbulk DEGs and single-cell DEGs
 
 First lets take a look at the DEG dataframes we made for both.
 
@@ -301,7 +308,7 @@ between the two methods here?
 
 
 
-### Step 5: Investigate the differences between pseudobulk DE and single-cell DE closer
+## Step 5: Investigate the differences between pseudobulk DE and single-cell DE closer
 
 Let's create lists of genes in each of our categories first
 
@@ -363,7 +370,7 @@ VlnPlot(ifnb.filtered, features = c("IFIT2", "PSMA4"),
 ```
 
 
-### Step 6: Creating our own custom visualisations for DEG analysis between cell-types in two different experimental groups
+## Step 6: Creating our own custom visualisations for DEG analysis between cell-types in two different experimental groups
 
 So far, we've been using functions wrapped within Seurat to plot and
 visualise our data. But we're not limited to those functions. Let's use
@@ -482,6 +489,61 @@ Do the same thing with significant DEGs from the sc approach. Do you see any dif
 
  Run the same code as above but with the `treatment.response.CD16` variable instead of `treatment.response.CD16.pseudo` variable.
 
+```{r}
+CD16.sig.markers <- treatment.response.CD16 %>% 
+  dplyr::filter(p_val_adj < 0.05) %>%
+  dplyr::mutate(gene = rownames(.))
+
+ifnb.filtered$celltype.stim.donor_id <- paste0(ifnb.filtered$seurat_annotations, "-",
+                                               ifnb.filtered$stim, "-", ifnb.filtered$donor_id)
+Idents(ifnb.filtered) <- "celltype.stim.donor_id"
+
+all.sig.avg.Expression.mat <- AverageExpression(ifnb.filtered, 
+                         features = CD16.sig.markers$gene, 
+                         layer = 'scale.data')
+
+## As of Seurat v5, we recommend using AggregateExpression to perform pseudo-bulk analysis.
+## This message is displayed once per session.
+
+# View(all.sig.avg.Expression.mat %>%
+#  as.data.frame())
+
+CD16.sig.avg.Expression.mat <- all.sig.avg.Expression.mat$RNA %>%
+  as.data.frame() %>%
+  dplyr::select(starts_with("CD16 Mono"))
+
+# View(CD16.sig.avg.Expression.mat)
+
+pheatmap::pheatmap(CD16.sig.avg.Expression.mat,
+         cluster_rows = TRUE,
+         show_rownames = FALSE, 
+         border_color = NA, 
+         fontsize = 10, 
+         scale = "row", 
+         fontsize_row = 10, 
+         height = 20)
+
+cluster_metadata <- data.frame(
+  row.names = colnames(CD16.sig.avg.Expression.mat)
+) %>% 
+  dplyr::mutate(
+    Cell_Type = "CD16 Mono",
+    Treatment_Group = ifelse(str_detect(row.names(.), "STIM|CTRL"), 
+                      str_extract(row.names(.), "STIM|CTRL")))
+
+sig.DEG.heatmap <- pheatmap::pheatmap(CD16.sig.avg.Expression.mat,
+         cluster_rows = TRUE,
+         show_rownames = FALSE,
+         annotation = cluster_metadata[, c("Treatment_Group", "Cell_Type")], 
+         border_color = NA, 
+         fontsize = 10, 
+         scale = "row", 
+         fontsize_row = 10, 
+         height = 20,
+         annotation_names_col = FALSE)
+
+sig.DEG.heatmap
+```
 :::::
 
 :::::
@@ -503,7 +565,8 @@ What kind of analyses do you think we can do next after obtaining a list of diff
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
--
+- Collapse single-cell counts to pseudobulk per donor × condition × cell type.
+- Compare single-cell DE vs pseudobulk DE.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

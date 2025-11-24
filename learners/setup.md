@@ -59,5 +59,8 @@ install.packages("tidyverse")
 install.packages("pheatmap")
 install.packages("metap")
 install.packages("ggplot2")
+<<<<<<< HEAD
+=======
 
 ```
+
