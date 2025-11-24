@@ -127,7 +127,7 @@ differential expression algorithms like DESeq2. We can see this clearly
 when we have a look at the ifnb.pseudbulk.df we make in the following
 code block.
 
-``` {r}
+``` {r, eval=FALSE}
 ifnb.pseudobulk <- AggregateExpression(ifnb.filtered, assays = "RNA",
                                    group.by = c("stim", "donor_id", "seurat_annotations"),
                                    return.seurat = TRUE)
