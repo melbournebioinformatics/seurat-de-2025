@@ -434,6 +434,35 @@ What do you think of the integration results now?
         
 **Hint:** Also look at the PC1 and PC2 plots for each integration method.
 
+::::::::::::::::::::::::::::::::::::: challenge 
+Cell Cycle Check 2 — AFTER integration (after umap.cca + clustering)
+
+Now that we have integrated the data, do you think the results will be the same or different?
+
+:::::::::::::::::::::::: solution 
+
+```{r}
+# ---- Cell-cycle check (POST-integration) ----
+
+# Visual on integrated embedding
+DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "Phase", pt.size = 0.3)
+
+# Phase composition by cluster and by condition
+tab_phase_cluster <- prop.table(table(ifnb.filtered$seurat_clusters, ifnb.filtered$Phase), 1) * 100
+tab_phase_cond    <- prop.table(table(ifnb.filtered$stim,            ifnb.filtered$Phase), 1) * 100
+pheatmap(tab_phase_cluster,
+         main = "Phase (%) by cluster",
+         display_numbers = TRUE,
+         number_format = "%.1f")
+
+pheatmap(tab_phase_cond,    main = "Phase (%) by condition (stim)")
+```
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::
+
+
 
 ## Step 6: Perform standard clustering steps after integration
 
@@ -481,34 +510,6 @@ Idents(ifnb.filtered) <- "kmeans_k12"
 
 :::::::::::::::::::::::::::::::::::
 
-
-::::::::::::::::::::::::::::::::::::: challenge 
-Cell Cycle Check 2 — AFTER integration (after umap.cca + clustering)
-
-Now that we have integrated the data, do you think the results will be the same or different?
-
-:::::::::::::::::::::::: solution 
-
-```{r}
-# ---- Cell-cycle check (POST-integration) ----
-
-# Visual on integrated embedding
-DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "Phase", pt.size = 0.3)
-
-# Phase composition by cluster and by condition
-tab_phase_cluster <- prop.table(table(ifnb.filtered$seurat_clusters, ifnb.filtered$Phase), 1) * 100
-tab_phase_cond    <- prop.table(table(ifnb.filtered$stim,            ifnb.filtered$Phase), 1) * 100
-pheatmap(tab_phase_cluster,
-         main = "Phase (%) by cluster",
-         display_numbers = TRUE,
-         number_format = "%.1f")
-
-pheatmap(tab_phase_cond,    main = "Phase (%) by condition (stim)")
-```
-
-:::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
