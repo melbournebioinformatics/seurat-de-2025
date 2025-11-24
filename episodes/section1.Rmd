@@ -67,6 +67,7 @@ library(metap)
 library(harmony)
 library(DropletUtils)
 library(ggplot2)
+library(SingleR)
 
 set.seed(4242) # Set Seed for Reproducibility
 ```
@@ -301,7 +302,12 @@ DimPlot(ifnb.filtered, reduction = 'pca', group.by = 'stim') # lets see how our 
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
-Cell Cycle Check 1 — BEFORE integration (after PCA / pre-Harmony/CCA) 
+
+**Cell Cycle Check 1 — BEFORE integration (after PCA / pre-Harmony / CCA)** 
+
+`Seurat` also features a function, `CellCyleScoring` to calculate which phase each individual cell is in the cell cycle using canonical markers. You can read more about it [here](https://satijalab.org/seurat/articles/cell_cycle_vignette.html).
+
+Which phase in the cell cycle are the clusters in primarily? Are they different or the same between clusters?
 
 :::::::::::::::::::::::: solution 
 
@@ -383,9 +389,7 @@ before.integration | after.harmony
 :::: discussion
 
 Looking at the UMAPs above, do you think integration was
-successful? Have a slide on what if its just different cell types. !!!
-question Try looking at the PC1 and PC2 plots for harmony and seurat as
-well
+successful?
 
 ::::
 
@@ -435,26 +439,17 @@ and needs to be done before differential expression analysis
 ``` {r}
 ifnb.filtered <- FindNeighbors(ifnb.filtered, reduction = "integrated.cca", dims = 1:20)
 
-
-
 ifnb.filtered <- FindClusters(ifnb.filtered, resolution = 0.5)
-
-
 
 ifnb.filtered <- JoinLayers(ifnb.filtered)
 ```
 
 
-::::::::::::::::::::::::::::::::::::: keypoints 
-
-- QC filtering removes low-quality cells (e.g., low gene count or high mitochondrial %).
-- Integration corrects sample-to-sample variation so cells group by biology, not by batch.
-- Harmony and CCA both align shared cell states but use different mathematical strategies.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
+## Additional Challenges
 
 ::::::::::::::::::::::::::::::::::::: challenge 
-K-means clustering
+
+You can also use K-means clustering to cluster the data to compare to other clustering methods. How can you use the `kmeans()` function from `stats` to cluster the data and visualise it using `DimPlot()`?
 
 :::::::::::::::::::::::: solution 
 
@@ -482,7 +477,9 @@ Idents(ifnb.filtered) <- "kmeans_k5"
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
-Cell-Cycle Check 2 — AFTER integration (after umap.cca + clustering)
+Cell Cycle Check 2 — AFTER integration (after umap.cca + clustering)
+
+Now that we have integrated the data, do you think the results will be the same or different?
 
 :::::::::::::::::::::::: solution 
 
@@ -507,3 +504,10 @@ pheatmap(tab_phase_cond,    main = "Phase (%) by condition (stim)")
 
 :::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- QC filtering removes low-quality cells (e.g., low gene count or high mitochondrial %).
+- Integration corrects sample-to-sample variation so cells group by biology, not by batch.
+- Harmony and CCA both align shared cell states but use different mathematical strategies.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
