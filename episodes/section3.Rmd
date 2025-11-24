@@ -143,7 +143,7 @@ ifnb.pseudobulk.df <- AggregateExpression(ifnb.filtered, assays = "RNA",
 
 We can view the top rows here:
 
-```{r,eval=FALSE}
+```{r}
 
 head(ifnb.pseudobulk.df)
 

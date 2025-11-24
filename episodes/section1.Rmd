@@ -50,6 +50,8 @@ library(metap)
 library(harmony)
 library(DropletUtils)
 library(ggplot2)
+library(SingleR)
+library(Celldex)
 
 set.seed(4242) # Set Seed for Reproducibility
 ```
@@ -67,6 +69,8 @@ library(metap)
 library(harmony)
 library(DropletUtils)
 library(ggplot2)
+library(SingleR)
+library(celldex)
 
 set.seed(4242) # Set Seed for Reproducibility
 ```
