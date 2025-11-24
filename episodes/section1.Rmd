@@ -67,6 +67,7 @@ library(metap)
 library(harmony)
 library(DropletUtils)
 library(ggplot2)
+library(SingleR)
 
 set.seed(4242) # Set Seed for Reproducibility
 ```
@@ -476,7 +477,9 @@ Idents(ifnb.filtered) <- "kmeans_k5"
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
-Cell-Cycle Check 2 — AFTER integration (after umap.cca + clustering)
+Cell Cycle Check 2 — AFTER integration (after umap.cca + clustering)
+
+Now that we have integrated the data, do you think the results will be the same or different?
 
 :::::::::::::::::::::::: solution 
 
