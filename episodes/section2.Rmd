@@ -23,6 +23,13 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, echo=FALSE, warning=FALSE,message=FALSE}
+suppressMessages({
+  suppressWarnings({
+    
+# Fix Github limit
+library(future)
+future::plan("sequential")
+options(future.globals.maxSize = 5 * 1024^3)  
 
 library(Seurat)
 #library(SeuratData)
@@ -34,6 +41,8 @@ library(grid)
 library(metap)
 library(harmony)
 library(scuttle)
+library(SingleR)
+library(celldex)
 set.seed(4242) # Set Seed for Reproducibility
 
 load('data/ifnb.RData')
@@ -62,7 +71,8 @@ ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "integrated.cca", dims = 1:2
 ifnb.filtered <- FindNeighbors(ifnb.filtered, reduction = "integrated.cca", dims = 1:20)
 ifnb.filtered <- FindClusters(ifnb.filtered, resolution = 0.5)
 ifnb.filtered <- JoinLayers(ifnb.filtered)
-
+  })
+})
 ```
 
 
@@ -110,13 +120,13 @@ FeaturePlot(ifnb.filtered, reduction = "umap.cca",
 
 
 ``` {r}
-# I happen to know that the cells in cluster 3 are CD16 monocytes - lets rename this cluster
+# I happen to know that the cells in cluster 4 are CD16 monocytes - lets rename this cluster
 # Idents(ifnb.filtered) # Let's look at the identities of our cells at the moment
 ```
 
 
 ``` {r}
-ifnb.filtered <- RenameIdents(ifnb.filtered, '4' = 'CD16 Mono') # Let's rename cells in cluster 3 with a new cell type label
+ifnb.filtered <- RenameIdents(ifnb.filtered, '4' = 'CD16 Mono') # Let's rename cells in cluster 4 with a new cell type label
 # Idents(ifnb.filtered) # we can take a look at the cell identities again
 ```
 
@@ -149,6 +159,40 @@ detail in the Intro to scRNA-seq workshop material.
 
 ::::
 
+::::::::::::::::::::::::::::::::::::: challenge 
+Automated Cell Type Annotation
+
+:::::::::::::::::::::::: solution 
+
+```{r, message=FALSE, warning=FALSE}
+# Load reference data 
+# Blood & immune lineages
+ref.set <- celldex::BlueprintEncodeData()
+
+ifnb.v4 <- JoinLayers(ifnb.filtered)
+sce.ifnb.filtered <- as.SingleCellExperiment(ifnb.v4)
+sce.ifnb.filtered <- logNormCounts(sce.ifnb.filtered)
+
+pred.cnts <- SingleR(
+  test = sce.ifnb.filtered,
+  ref = ref.set,
+  labels = ref.set$label.main
+)
+
+lbls.keep <- table(pred.cnts$labels)>10
+# Add SingleR labels to Seurat metadata
+ifnb.filtered$SingleR.labels <- sce.ifnb.filtered$SingleR.labels
+ifnb.filtered$SingleR.labels <- ifelse(lbls.keep[pred.cnts$labels], pred.cnts$labels, 'Other')
+
+# Run UMAP (based on PCA)
+ifnb.filtered <- RunUMAP(ifnb.filtered, dims = 1:20)
+DimPlot(ifnb.filtered, reduction='umap.cca', group.by='SingleR.labels',  label = TRUE, label.size = 3 )
+
+```
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::
 
 ## Step 3: Find differentially expressed genes (DEGs) between our two conditions, using CD16 Mono cells as an example
 
@@ -168,8 +212,6 @@ DimPlot(ifnb.filtered, reduction = "umap.cca", label = T) # each cluster is now 
 DimPlot(ifnb.filtered, reduction = "umap.cca", 
         label = T, split.by = "stim") # Lets separate by condition to see what we've done a bit more clearly
 ```
-
-
 
 We'll now leverage these new identities to compare DEGs between our
 treatment groups
@@ -215,7 +257,7 @@ interpret sometimes (we'll learn how to make better and clearer custom
 heatmaps using the pheatmap package from our Seurat expression data
 later on).
 
-``` {r}
+``` {r,warning=FALSE,message=FALSE}
 ifnb.treatVsCtrl.markers <- readRDS(url("https://github.com/manveerchauhan/Seurat_DE_Workshop/raw/refs/heads/main/ifnb_stimVsCtrl_markers.rds"))
 
 top5 <- ifnb.treatVsCtrl.markers %>%
