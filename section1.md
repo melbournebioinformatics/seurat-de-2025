@@ -50,6 +50,8 @@ library(metap)
 library(harmony)
 library(DropletUtils)
 library(ggplot2)
+library(SingleR)
+library(Celldex)
 
 set.seed(4242) # Set Seed for Reproducibility
 ```
@@ -203,14 +205,6 @@ ifnb.filtered <- subset(ifnb, subset = nCount_RNA > 800 &
 
 qc.metric.plts.filtered <- VlnPlot(ifnb.filtered, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3) +
   ggtitle("After Filtering")
-```
-
-``` warning
-Warning in SingleExIPlot(type = type, data = data[, x, drop = FALSE], idents =
-idents, : All cells have the same value of percent.mt.
-```
-
-``` r
 association.plt.filtered <- FeatureScatter(ifnb.filtered, feature1 = "nCount_RNA", feature2 = "nFeature_RNA") + geom_smooth(method = "lm") +
   ggtitle("After Filtering")
 
@@ -221,10 +215,6 @@ qc.metric.plts.filtered
 
 ``` r
 association.plt.filtered
-```
-
-``` output
-`geom_smooth()` using formula = 'y ~ x'
 ```
 
 <img src="fig/section1-rendered-unnamed-chunk-6-2.png" style="display: block; margin: auto;" />
@@ -281,33 +271,7 @@ wrap_plots(list(qc.metric.plts, qc.metric.plts.filtered),
 ``` r
 association.plts <- standardise_plt_scale(association.plt.raw,
                                           association.plt.filtered)
-```
-
-``` output
-`geom_smooth()` using formula = 'y ~ x'
-`geom_smooth()` using formula = 'y ~ x'
-```
-
-``` r
 association.plts
-```
-
-``` output
-`geom_smooth()` using formula = 'y ~ x'
-```
-
-``` warning
-Warning: Removed 2 rows containing missing values or values outside the scale range
-(`geom_smooth()`).
-```
-
-``` output
-`geom_smooth()` using formula = 'y ~ x'
-```
-
-``` warning
-Warning: Removed 2 rows containing missing values or values outside the scale range
-(`geom_smooth()`).
 ```
 
 <img src="fig/section1-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
@@ -341,8 +305,6 @@ Active assay: RNA (14053 features, 0 variable features)
  2 layers present: counts, data
 ```
 
-
-
 Next we need to split our count matrices based on conditions. This step
 stores stimulated versus unstimulated expression information separately,
 creating a list of RNA assays grouped by the "stim" condition. Note:
@@ -351,15 +313,6 @@ this is important for downstream integration steps in Seurat v5.
 
 ``` r
 ifnb.filtered[["RNA"]] <- split(ifnb.filtered[["RNA"]], f = ifnb.filtered$stim) # Lets split our count matrices based on conditions (stored within different layers) -> needed for integration steps in Seurat v5
-```
-
-``` warning
-Warning: Input is a v3 assay and `split()` only works for v5 assays; converting
-• to a v5 assay
-```
-
-``` warning
-Warning: Assay RNA changing from Assay to Assay5
 ```
 
 
@@ -455,57 +408,6 @@ ElbowPlot(ifnb.filtered) # Visualise the dimensionality of the data, looks like 
 
 
 
-
-``` r
-ifnb.filtered <- RunUMAP(ifnb.filtered, dims = 1:20, reduction = 'pca')
-```
-
-``` warning
-Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
-To use Python UMAP via reticulate, set umap.method to 'umap-learn' and metric to 'correlation'
-This message will be shown once per session
-```
-
-``` output
-00:35:57 UMAP embedding parameters a = 0.9922 b = 1.112
-```
-
-``` output
-00:35:57 Read 13548 rows and found 20 numeric columns
-```
-
-``` output
-00:35:57 Using Annoy for neighbor search, n_neighbors = 30
-```
-
-``` output
-00:35:57 Building Annoy index with metric = cosine, n_trees = 50
-```
-
-``` output
-0%   10   20   30   40   50   60   70   80   90   100%
-```
-
-``` output
-[----|----|----|----|----|----|----|----|----|----|
-```
-
-``` output
-**************************************************|
-00:35:59 Writing NN index file to temp file /tmp/RtmpskdEwC/file1a6b20eaa9e
-00:35:59 Searching Annoy index using 1 thread, search_k = 3000
-00:36:03 Annoy recall = 100%
-00:36:04 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-00:36:06 Initializing from normalized Laplacian + noise (using RSpectra)
-00:36:07 Commencing optimization for 200 epochs, with 582700 positive edges
-00:36:07 Using rng type: pcg
-00:36:12 Optimization finished
-```
-
-``` r
-DimPlot(ifnb.filtered, reduction = 'umap', group.by = 'stim') # lets see how our cells separate by condition and whether integration is necessary
-```
-
 <img src="fig/section1-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
 
 
@@ -519,7 +421,12 @@ DimPlot(ifnb.filtered, reduction = 'pca', group.by = 'stim') # lets see how our 
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
-Cell Cycle Check 1 — BEFORE integration (after PCA / pre-Harmony/CCA) 
+
+**Cell Cycle Check 1 — BEFORE integration (after PCA / pre-Harmony / CCA)** 
+
+`Seurat` also features a function, `CellCyleScoring` to calculate which phase each individual cell is in the cell cycle using canonical markers. You can read more about it [here](https://satijalab.org/seurat/articles/cell_cycle_vignette.html).
+
+Which phase in the cell cycle are the clusters in primarily? Are they different or the same between clusters?
 
 :::::::::::::::::::::::: solution 
 
@@ -536,65 +443,7 @@ ifnb.filtered <- CellCycleScoring(
   set.ident    = FALSE,
   search       = TRUE
 )
-```
 
-``` warning
-Warning: The following features are not present in the object: DTL, UHRF1,
-CDC45, EXO1, CASP8AP2, E2F8, attempting to find updated synonyms
-```
-
-``` warning
-Warning: No updated symbols found
-```
-
-``` warning
-Warning: The following features are still not present in the object: DTL,
-UHRF1, CDC45, EXO1, CASP8AP2, E2F8
-```
-
-``` warning
-Warning: The following features are not present in the object: PIMREG, CKAP2L,
-HJURP, JPT1, CDC25C, KIF2C, DLGAP5, ANLN, attempting to find updated synonyms
-```
-
-``` warning
-Warning: No updated symbols found
-```
-
-``` warning
-Warning: The following features are still not present in the object: PIMREG,
-CKAP2L, HJURP, JPT1, CDC25C, KIF2C, DLGAP5, ANLN
-```
-
-``` warning
-Warning: The following features are not present in the object: DTL, UHRF1,
-CDC45, EXO1, CASP8AP2, E2F8, attempting to find updated synonyms
-```
-
-``` warning
-Warning: No updated symbols found
-```
-
-``` warning
-Warning: The following features are still not present in the object: DTL,
-UHRF1, CDC45, EXO1, CASP8AP2, E2F8
-```
-
-``` warning
-Warning: The following features are not present in the object: PIMREG, CKAP2L,
-HJURP, JPT1, CDC25C, KIF2C, DLGAP5, ANLN, attempting to find updated synonyms
-```
-
-``` warning
-Warning: No updated symbols found
-```
-
-``` warning
-Warning: The following features are still not present in the object: PIMREG,
-CKAP2L, HJURP, JPT1, CDC25C, KIF2C, DLGAP5, ANLN
-```
-
-``` r
 # Quick UMAP on PCA (if you haven't already run it)
 if (!"umap" %in% Reductions(ifnb.filtered)) {
   ifnb.filtered <- RunUMAP(ifnb.filtered, dims = 1:20, reduction = "pca")
@@ -698,21 +547,21 @@ ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "harmony", dims = 1:20, redu
 ```
 
 ``` output
-00:36:31 UMAP embedding parameters a = 0.9922 b = 1.112
-00:36:31 Read 13548 rows and found 20 numeric columns
-00:36:31 Using Annoy for neighbor search, n_neighbors = 30
-00:36:31 Building Annoy index with metric = cosine, n_trees = 50
+22:27:13 UMAP embedding parameters a = 0.9922 b = 1.112
+22:27:13 Read 13548 rows and found 20 numeric columns
+22:27:13 Using Annoy for neighbor search, n_neighbors = 30
+22:27:13 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-00:36:32 Writing NN index file to temp file /tmp/RtmpskdEwC/file1a6b3ed94a63
-00:36:32 Searching Annoy index using 1 thread, search_k = 3000
-00:36:37 Annoy recall = 100%
-00:36:38 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-00:36:40 Initializing from normalized Laplacian + noise (using RSpectra)
-00:36:40 Commencing optimization for 200 epochs, with 586822 positive edges
-00:36:40 Using rng type: pcg
-00:36:46 Optimization finished
+22:27:14 Writing NN index file to temp file /tmp/RtmpG03a0W/file232524929c5b
+22:27:14 Searching Annoy index using 1 thread, search_k = 3000
+22:27:18 Annoy recall = 100%
+22:27:19 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+22:27:21 Initializing from normalized Laplacian + noise (using RSpectra)
+22:27:22 Commencing optimization for 200 epochs, with 586822 positive edges
+22:27:22 Using rng type: pcg
+22:27:28 Optimization finished
 ```
 
 ``` r
@@ -730,16 +579,13 @@ before.integration | after.harmony
 :::: discussion
 
 Looking at the UMAPs above, do you think integration was
-successful? Have a slide on what if its just different cell types. !!!
-question Try looking at the PC1 and PC2 plots for harmony and seurat as
-well
+successful?
 
 ::::
 
 
 
-## Step 5: Integrating our data using an alternative Seurat CCA
-method
+## Step 5: Integrating our data using an alternative Seurat CCA method
 
 
 ``` r
@@ -747,93 +593,9 @@ ifnb.filtered <- IntegrateLayers(object = ifnb.filtered,
                                  method = CCAIntegration,
                                  orig.reduction = "pca", 
                                  new.reduction = "integrated.cca")
-```
 
-``` output
-Finding all pairwise anchors
-```
-
-``` output
-Running CCA
-```
-
-``` output
-Merging objects
-```
-
-``` output
-Finding neighborhoods
-```
-
-``` output
-Finding anchors
-```
-
-``` output
-	Found 13439 anchors
-```
-
-``` output
-Merging dataset 1 into 2
-```
-
-``` output
-Extracting anchors for merged samples
-```
-
-``` output
-Finding integration vectors
-```
-
-``` output
-Finding integration vector weights
-```
-
-``` output
-Integrating data
-```
-
-``` r
 ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "integrated.cca", dims = 1:20, reduction.name = "umap.cca")
-```
 
-``` output
-00:39:38 UMAP embedding parameters a = 0.9922 b = 1.112
-```
-
-``` output
-00:39:38 Read 13548 rows and found 20 numeric columns
-```
-
-``` output
-00:39:38 Using Annoy for neighbor search, n_neighbors = 30
-```
-
-``` output
-00:39:38 Building Annoy index with metric = cosine, n_trees = 50
-```
-
-``` output
-0%   10   20   30   40   50   60   70   80   90   100%
-```
-
-``` output
-[----|----|----|----|----|----|----|----|----|----|
-```
-
-``` output
-**************************************************|
-00:39:39 Writing NN index file to temp file /tmp/RtmpskdEwC/file1a6b3c3dc9ad
-00:39:39 Searching Annoy index using 1 thread, search_k = 3000
-00:39:43 Annoy recall = 100%
-00:39:45 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-00:39:47 Initializing from normalized Laplacian + noise (using RSpectra)
-00:39:47 Commencing optimization for 200 epochs, with 595526 positive edges
-00:39:47 Using rng type: pcg
-00:39:53 Optimization finished
-```
-
-``` r
 after.seuratCCA <- DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "stim") +
   ggtitle("After Seurat CCA Integration")
 
@@ -865,6 +627,57 @@ What do you think of the integration results now?
 
         
 **Hint:** Also look at the PC1 and PC2 plots for each integration method.
+
+::::::::::::::::::::::::::::::::::::: challenge 
+Cell Cycle Check 2 — AFTER integration (after umap.cca + clustering)
+
+Now that we have integrated the data, do you think the results will be the same or different?
+
+:::::::::::::::::::::::: solution 
+
+
+``` r
+# ---- Cell-cycle check (POST-integration) ----
+
+# Visual on integrated embedding
+DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "Phase", pt.size = 0.3)
+```
+
+<img src="fig/section1-rendered-unnamed-chunk-19-1.png" style="display: block; margin: auto;" />
+
+``` r
+# Phase composition by cluster and by condition
+tab_phase_cluster <- prop.table(table(ifnb.filtered$seurat_clusters, ifnb.filtered$Phase), 1) * 100
+```
+
+``` error
+Error in `x[[i, drop = TRUE]]` at SeuratObject/R/seurat.R:2939:3:
+! 'seurat_clusters' not found in this Seurat object
+ Did you mean "seurat_annotations"?
+```
+
+``` r
+tab_phase_cond    <- prop.table(table(ifnb.filtered$stim,            ifnb.filtered$Phase), 1) * 100
+pheatmap(tab_phase_cluster,
+         main = "Phase (%) by cluster",
+         display_numbers = TRUE,
+         number_format = "%.1f")
+```
+
+``` error
+Error: object 'tab_phase_cluster' not found
+```
+
+``` r
+pheatmap(tab_phase_cond,    main = "Phase (%) by condition (stim)")
+```
+
+<img src="fig/section1-rendered-unnamed-chunk-19-2.png" style="display: block; margin: auto;" />
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::
+
 
 
 ## Step 6: Perform standard clustering steps after integration
@@ -898,12 +711,49 @@ Number of edges: 521570
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.9002
 Number of communities: 13
-Elapsed time: 2 seconds
+Elapsed time: 1 seconds
 ```
 
 ``` r
 ifnb.filtered <- JoinLayers(ifnb.filtered)
 ```
+
+
+## Additional Challenges
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+You can also use K-means clustering to cluster the data to compare to other clustering methods. How can you use the `kmeans()` function from `stats` to cluster the data and visualise it using `DimPlot()`?
+
+In this example, we used k = 5 purely for illustration. As you can see, it produces fewer clusters compared to the default Louvain algorithm. You are welcome to try different k values in your own time to explore whether k-means clustering is a suitable option in this context.
+
+:::::::::::::::::::::::: solution 
+
+
+``` r
+# K-means
+emb <- Embeddings(ifnb.filtered, "pca")[, 1:20]
+set.seed(1)
+km <- kmeans(emb, centers = 12, nstart = 50)
+
+ifnb.filtered$kmeans_k12 <- factor(km$cluster)
+
+# Compare labelings
+p1 <- DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "seurat_clusters") + ggtitle("Louvain")
+p2 <- DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "kmeans_k12") + ggtitle("k-means (K=12)")
+p1 | p2
+```
+
+<img src="fig/section1-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" />
+
+``` r
+# If you decide to proceed with k-means downstream:
+Idents(ifnb.filtered) <- "kmeans_k12"
+```
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
@@ -913,70 +763,3 @@ ifnb.filtered <- JoinLayers(ifnb.filtered)
 - Harmony and CCA both align shared cell states but use different mathematical strategies.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge 
-K-means clustering
-
-:::::::::::::::::::::::: solution 
-
-
-``` r
-# K-means
-emb <- Embeddings(ifnb.filtered, "pca")[, 1:20]
-set.seed(1)
-km <- kmeans(emb, centers = 5, nstart = 50)
-
-ifnb.filtered$kmeans_k5 <- factor(km$cluster)
-
-# Compare labelings
-p1 <- DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "seurat_clusters") + ggtitle("Louvain")
-p2 <- DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "kmeans_k5") + ggtitle("k-means (K=5)")
-p1 | p2
-```
-
-<img src="fig/section1-rendered-unnamed-chunk-20-1.png" style="display: block; margin: auto;" />
-
-``` r
-# If you decide to proceed with k-means downstream:
-Idents(ifnb.filtered) <- "kmeans_k5"
-```
-
-:::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::
-
-
-::::::::::::::::::::::::::::::::::::: challenge 
-Cell-Cycle Check 2 — AFTER integration (after umap.cca + clustering)
-
-:::::::::::::::::::::::: solution 
-
-
-``` r
-# ---- Cell-cycle check (POST-integration) ----
-
-# Visual on integrated embedding
-DimPlot(ifnb.filtered, reduction = "umap.cca", group.by = "Phase", pt.size = 0.3)
-```
-
-<img src="fig/section1-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" />
-
-``` r
-# Phase composition by cluster and by condition
-tab_phase_cluster <- prop.table(table(ifnb.filtered$seurat_clusters, ifnb.filtered$Phase), 1) * 100
-tab_phase_cond    <- prop.table(table(ifnb.filtered$stim,            ifnb.filtered$Phase), 1) * 100
-pheatmap(tab_phase_cluster, main = "Phase (%) by cluster")
-```
-
-<img src="fig/section1-rendered-unnamed-chunk-21-2.png" style="display: block; margin: auto;" />
-
-``` r
-pheatmap(tab_phase_cond,    main = "Phase (%) by condition (stim)")
-```
-
-<img src="fig/section1-rendered-unnamed-chunk-21-3.png" style="display: block; margin: auto;" />
-
-:::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::
-
