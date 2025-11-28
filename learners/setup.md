@@ -2,34 +2,34 @@
 title: Setup
 ---
 
-
-## Data Sets
-
-
 :::: prereq
 
 Some knowledge of R and scRNA-seq analysis is assumed. We recommend reviewing the following materials before the starting the materials:
 - [Introduction to R](https://mbite.org/intro-to-r/)
 - [10X single-cell RNA-seq analysis in R](https://mbite.org/tutorials/singlecell/)
 
-This lesson assumes you have the latest versions of R and RStudio installed on your computer.
-
+Please see our [Intro to R](https://mbite.org/intro-to-r/) and [RNA-seq: counts to genes](https://mbite.org/intro-to-r/) workshops if you need a refresher.
 
 ::::
 
 
+## Data Sets
+
+
+[Click here to download the RData object](../episodes/data/ifnb.RData) that will be used for this workshop.
+
+
 ## Software Setup
 
-::::::::::::::::::::::::::::::::::::::: discussion
+## RStudio Setup
 
-If you don't have R and RStudio already installed, please download them here:
+We use RStudio for coding in R.
 
-- [Download and install the latest version of R using the UniMelb mirror](https://cran.ms.unimelb.edu.au/).
-- [Download and install RStudio](https://posit.co/download/rstudio-desktop/#download).
+[Click here and follow the instructions](https://posit.co/download/rstudio-desktop/) to install RStudio Desktop in your system.
 
+::::::::::::::::: discussion
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::
-
+### R packages
 
 **Run the code block below to install the packages needed for this
 workshop.**
