@@ -18,13 +18,13 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="mb-logo" alt="Seurat DE" src="../assets/images/mb-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
+        <img id="mb-logo" alt="Seurat DE" src="../assets/images/mb-logo.svg"><span class="badge text-bg-warning">
+          <abbr title="This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.">
             <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
+              <i aria-hidden="true" class="icon" data-feather="alert-triangle" style="border-radius: 5px"></i>
+              Alpha
             </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
+            <span class="visually-hidden">This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.</span>
           </abbr>
         </span>
 
@@ -220,7 +220,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="section1.html">2. Section 1: Setup, Quality Control and Sample Integration</a>
+        <a href="section1.html">2. Setup, Quality Control and Sample Integration</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -229,7 +229,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="section2.html">3. Section 2: Differential Gene Expression when dealing with two treatment conditions</a>
+        <a href="section2.html">3. Differential Gene Expression when dealing with two treatment conditions</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -238,7 +238,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="section3.html">4. Section 3 : Differential Expression using a pseudobulk approach and DESeq2</a>
+        <a href="section3.html">4. Differential Expression using a pseudobulk approach and DESeq2</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -296,15 +296,15 @@
           Home
         </a>
         <a class="chapter-link float-end" href="../instructor/section1.html" rel="next">
-          Next: Section 1: Setup,...
+          Next: Setup, Quality...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction</h1>
-        <p>Last updated on 2025-11-25 |
+        <p>Last updated on 2025-11-28 |
 
-        <a href="https://github.com/melbournebioinformatics/workbench-template-rmd/edit/main/episodes/introduction.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/melbournebioinformatics/seurat-de-2025/edit/main/episodes/introduction.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
 
 
@@ -315,56 +315,41 @@
         </div>
 
         
-<div class="section level1">
-<h1 id="scrna-seq-integration-and-differential-expression">scRNA-seq Integration and Differential Expression<a class="anchor" aria-label="anchor" href="#scrna-seq-integration-and-differential-expression"></a></h1>
-<p><a href="../files/Seurate-DE-slides-NEW.pdf"><strong>Slides available
-here.</strong></a></p>
-<p><strong>Author:</strong> Manveer Chauhan, Clark Lab, The University
-of Melbourne.<br><strong>Contributors:</strong> Vini Salazar, Susan (Jiayi) Si, Raymond
-(Bibo) Zhao, Emma Gail, Melbourne Bioinformatics.</p>
-<p>Last updated November 2025</p>
-<div class="section level2">
-<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a></h2>
-<p><strong>Topic</strong></p>
-<ul class="task-list"><li><label><input type="checkbox">Genomics</label></li>
-<li><label><input type="checkbox" checked>Transcriptomics</label></li>
-<li><label><input type="checkbox">Proteomics</label></li>
-<li><label><input type="checkbox">Metabolomics</label></li>
-<li><label><input type="checkbox">Statistics and
-visualisation</label></li>
-<li><label><input type="checkbox">Structural Modelling</label></li>
-<li><label><input type="checkbox">Basic skills</label></li>
-</ul><p><strong>Skill level</strong></p>
-<ul class="task-list"><li><label><input type="checkbox">Beginner<br></label></li>
-<li><label><input type="checkbox" checked>Intermediate<br></label></li>
-<li><label><input type="checkbox">Advanced</label></li>
-</ul><p><strong>Data:</strong> IFNB-Stimulated and Control PBMCs.</p>
-<p><strong>Tools:</strong> R &gt;=4.4.0 and associated packages:</p>
-<ul><li>Seurat<br></li>
-<li>SeuratData<br></li>
-<li>tidyverse<br></li>
-<li>DESeq2<br></li>
-<li>patchwork<br></li>
-<li>pheatmap<br></li>
-<li>grid<br></li>
-<li>metap</li>
-</ul><p><strong>Pipeline:</strong><br><em>Section 1:</em> Setup, Quality Control and Sample Integration.<br><em>Section 2:</em> Differential Gene Expression when dealing with two
-treatment conditions.<br><em>Section 3:</em> Differential Expression using a pseudobulk approach
-and DESeq2.</p>
-<p><strong>Learning objectives:</strong></p>
+
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>How to perform differential expression analysis with Seurat?</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
 <ul><li>Gain more familiarity with standard scRNA-seq Quality Control (QC)
-steps</li>
+steps.</li>
 <li>Understand and get comfortable using various integration strategies
-(harmoy and seuratCCA)</li>
+(<code>harmoy</code> and <code>seuratCCA</code>).</li>
 <li>Understand when and how to use all of the differential expression
-functions offered by Seurat: FindMarkers(), FindConservedMarkers(), and
-FindAllMarkers()</li>
+functions offered by Seurat: <code>FindMarkers()</code>,
+<code>FindConservedMarkers()</code>, and
+<code>FindAllMarkers()</code>.</li>
 <li>Learn how to use differential expression tools meant for bulk data,
 like DESeq2, for single-cell ‘pseudobulk’ data and understand why you
 might choose this approach.</li>
 <li>Learn different ways to visualise both in-built Seurat functions and
 external packages like pheatmap.</li>
-</ul><div id="callout1" class="callout">
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -383,8 +368,7 @@ external packages like pheatmap.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
-</div>
+
 
 
       </div> <!-- / div.lesson-content -->
@@ -399,7 +383,7 @@ any links that you are not going to use.
           Home
         </a>
         <a class="chapter-link float-end" href="../instructor/section1.html" rel="next">
-          Next: Section 1: Setup,...
+          Next: Setup, Quality...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -411,14 +395,14 @@ any links that you are not going to use.
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
 
-        <a href="https://github.com/melbournebioinformatics/workbench-template-rmd/edit/main/episodes/introduction.Rmd" class="external-link">Edit on GitHub</a>
+        <a href="https://github.com/melbournebioinformatics/seurat-de-2025/edit/main/episodes/introduction.Rmd" class="external-link">Edit on GitHub</a>
 
 	
-        | <a href="https://github.com/melbournebioinformatics/workbench-template-rmd/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
-        | <a href="https://github.com/melbournebioinformatics/workbench-template-rmd/" class="external-link">Source</a></p>
+        | <a href="https://github.com/melbournebioinformatics/seurat-de-2025/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
+        | <a href="https://github.com/melbournebioinformatics/seurat-de-2025/" class="external-link">Source</a></p>
         <p>
         <a href="../citation.html">Cite</a>
-        | <a href="mailto:fixme@fixme.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+        | <a href="mailto:vinicius.salazar%20%5Bat%5D%20unimelb.edu.au">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 		</div>
 		<div class="col-md-6">
 
@@ -441,14 +425,14 @@ any links that you are not going to use.
   "inLanguage": "en",
   "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson",
+  "keywords": "rna-seq, single cell, gene expression, transcriptomics, omics",
   "name": "Introduction",
   "creativeWorkStatus": "active",
   "url": "melbournebioinformatics.github.io/uom-varnish/instructor/introduction.html",
   "identifier": "melbournebioinformatics.github.io/uom-varnish/instructor/introduction.html",
   "dateCreated": "2025-11-01",
-  "dateModified": "2025-11-25",
-  "datePublished": "2025-11-25"
+  "dateModified": "2025-11-28",
+  "datePublished": "2025-11-28"
 }
 
   </script><script>

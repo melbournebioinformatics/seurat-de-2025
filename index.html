@@ -18,13 +18,13 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="mb-logo" alt="Seurat DE" src="assets/images/mb-logo.svg"><span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
+        <img id="mb-logo" alt="Seurat DE" src="assets/images/mb-logo.svg"><span class="badge text-bg-warning">
+          <abbr title="This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.">
             <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
+              <i aria-hidden="true" class="icon" data-feather="alert-triangle" style="border-radius: 5px"></i>
+              Alpha
             </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
+            <span class="visually-hidden">This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.</span>
           </abbr>
         </span>
 
@@ -210,6 +210,7 @@
       <div class="accordion-body">
         <ul><li><a href="#data-sets">Data Sets</a></li>
 <li><a href="#software-setup">Software Setup</a></li>
+<li><a href="#rstudio-setup">RStudio Setup</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -228,7 +229,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="section1.html">2. Section 1: Setup, Quality Control and Sample Integration</a>
+        <a href="section1.html">2. Setup, Quality Control and Sample Integration</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -237,7 +238,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="section2.html">3. Section 2: Differential Gene Expression when dealing with two treatment conditions</a>
+        <a href="section2.html">3. Differential Gene Expression when dealing with two treatment conditions</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -246,7 +247,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="section3.html">4. Section 3 : Differential Expression using a pseudobulk approach and DESeq2</a>
+        <a href="section3.html">4. Differential Expression using a pseudobulk approach and DESeq2</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -303,16 +304,34 @@
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Setup</h1>
       
 
-<p>This is a new lesson built with <a href="https://carpentries.github.io/sandpaper-docs" class="external-link">The Carpentries
-Workbench</a>.</p>
+<p><a href="files/Seurate-DE-slides-NEW.pdf"><strong>Slides available
+here.</strong></a></p>
+<p><strong>Author:</strong> Manveer Chauhan, Clark Lab, The University
+of Melbourne.<br><strong>Contributors:</strong> Vini Salazar, Susan (Jiayi) Si, Raymond
+(Bibo) Zhao, Emma Gail, Melbourne Bioinformatics.</p>
+<p>Last updated November 2025</p>
+<section><h2 class="section-heading" id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a></h2>
+<hr class="half-width"><p><strong>Topic</strong></p>
+<ul class="task-list"><li><label><input type="checkbox">Genomics</label></li>
+<li><label><input type="checkbox" checked>Transcriptomics</label></li>
+<li><label><input type="checkbox">Proteomics</label></li>
+<li><label><input type="checkbox">Metabolomics</label></li>
+<li><label><input type="checkbox">Statistics and
+visualisation</label></li>
+<li><label><input type="checkbox">Structural Modelling</label></li>
+<li><label><input type="checkbox">Basic skills</label></li>
+</ul><p><strong>Skill level</strong></p>
+<ul class="task-list"><li><label><input type="checkbox">Beginner<br></label></li>
+<li><label><input type="checkbox" checked>Intermediate<br></label></li>
+<li><label><input type="checkbox">Advanced</label></li>
+</ul><p><strong>Content:</strong><br><em>Section 1:</em> Setup, Quality Control and Sample Integration.<br><em>Section 2:</em> Differential Gene Expression when dealing with two
+treatment conditions.<br><em>Section 3:</em> Differential Expression using a pseudobulk approach
+and DESeq2.</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-      <section id="setup"><section><h2 class="section-heading" id="data-sets">Data Sets<a class="anchor" aria-label="anchor" href="#data-sets"></a></h2>
-<hr class="half-width"><div id="prereq1" class="callout prereq">
+</section><section id="setup"><div id="prereq1" class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
 </div>
@@ -323,30 +342,23 @@ any links that you are not going to use.
 reviewing the following materials before the starting the materials: -
 <a href="https://mbite.org/intro-to-r/" class="external-link">Introduction to R</a> - <a href="https://mbite.org/tutorials/singlecell/" class="external-link">10X single-cell RNA-seq
 analysis in R</a></p>
-<p>This lesson assumes you have the latest versions of R and RStudio
-installed on your computer.</p>
+<p>Please see our <a href="https://mbite.org/intro-to-r/" class="external-link">Intro to R</a>
+and <a href="https://mbite.org/intro-to-r/" class="external-link">RNA-seq: counts to genes</a>
+workshops if you need a refresher.</p>
 </div>
 </div>
 </div>
+<section><h2 class="section-heading" id="data-sets">Data Sets<a class="anchor" aria-label="anchor" href="#data-sets"></a></h2>
+<hr class="half-width"><p><a href="data/ifnb.RData">Click here to download the RData object</a>
+that will be used for this workshop.</p>
 </section><section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a></h2>
-<hr class="half-width"><div id="discussion1" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<span class="callout-header">Discussion</span>
-<div class="callout-inner">
-<div class="callout-content">
-<p>If you don’t have R and RStudio already installed, please download
-them here:</p>
-<ul><li>
-<a href="https://cran.ms.unimelb.edu.au/" class="external-link">Download and install the
-latest version of R using the UniMelb mirror</a>.</li>
-<li>
-<a href="https://posit.co/download/rstudio-desktop/#download" class="external-link">Download and
-install RStudio</a>.</li>
-</ul></div>
-</div>
-</div>
+<hr class="half-width"></section><section><h2 class="section-heading" id="rstudio-setup">RStudio Setup<a class="anchor" aria-label="anchor" href="#rstudio-setup"></a></h2>
+<hr class="half-width"><p>We use RStudio for coding in R.</p>
+<p><a href="https://posit.co/download/rstudio-desktop/" class="external-link">Click here and
+follow the instructions</a> to install RStudio Desktop in your
+system.</p>
+<div class="section level3">
+<h3 id="r-packages">R packages<a class="anchor" aria-label="anchor" href="#r-packages"></a></h3>
 <p><strong>Run the code block below to install the packages needed for
 this workshop.</strong></p>
 <p>To check if installed properly, load each package in one at a time
@@ -379,6 +391,7 @@ using the <code>library()</code> function.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
@@ -394,14 +407,14 @@ any links that you are not going to use.
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
 
-        <a href="https://github.com/melbournebioinformatics/workbench-template-rmd/edit/main/index.md" class="external-link">Edit on GitHub</a>
+        <a href="https://github.com/melbournebioinformatics/seurat-de-2025/edit/main/index.md" class="external-link">Edit on GitHub</a>
 
 	
-        | <a href="https://github.com/melbournebioinformatics/workbench-template-rmd/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
-        | <a href="https://github.com/melbournebioinformatics/workbench-template-rmd/" class="external-link">Source</a></p>
+        | <a href="https://github.com/melbournebioinformatics/seurat-de-2025/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
+        | <a href="https://github.com/melbournebioinformatics/seurat-de-2025/" class="external-link">Source</a></p>
         <p>
         <a href="citation.html">Cite</a>
-        | <a href="mailto:fixme@fixme.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+        | <a href="mailto:vinicius.salazar%20%5Bat%5D%20unimelb.edu.au">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 		</div>
 		<div class="col-md-6">
 
@@ -424,14 +437,14 @@ any links that you are not going to use.
   "inLanguage": "en",
   "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson",
+  "keywords": "rna-seq, single cell, gene expression, transcriptomics, omics",
   "name": "Differential Expression with Seurat",
   "creativeWorkStatus": "active",
   "url": "melbournebioinformatics.github.io/uom-varnish/index.html",
   "identifier": "melbournebioinformatics.github.io/uom-varnish/index.html",
   "dateCreated": "2025-11-01",
-  "dateModified": "2025-11-25",
-  "datePublished": "2025-11-25"
+  "dateModified": "2025-11-28",
+  "datePublished": "2025-11-28"
 }
 
   </script><script>
