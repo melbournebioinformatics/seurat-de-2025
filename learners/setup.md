@@ -27,7 +27,6 @@ We use RStudio for coding in R.
 
 [Click here and follow the instructions](https://posit.co/download/rstudio-desktop/) to install RStudio Desktop in your system.
 
-::::::::::::::::: discussion
 
 ### R packages
 
@@ -59,6 +58,4 @@ install.packages("pheatmap")
 install.packages("metap")
 install.packages("ggplot2")
 
-
 ```
-
