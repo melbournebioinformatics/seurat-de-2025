@@ -1,5 +1,5 @@
 ---
-title: 'Section 2: Differential Gene Expression when dealing with two treatment conditions'
+title: 'Differential Gene Expression when dealing with two treatment conditions'
 teaching: 10
 exercises: 2
 ---

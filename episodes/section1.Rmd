@@ -1,5 +1,5 @@
 ---
-title: 'Section 1: Setup, Quality Control and Sample Integration'
+title: 'Setup, Quality Control and Sample Integration'
 teaching: 10
 exercises: 2
 ---
