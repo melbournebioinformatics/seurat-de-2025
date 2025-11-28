@@ -1,5 +1,5 @@
 ---
-title: 'Section 3 : Differential Expression using a pseudobulk approach and DESeq2'
+title: 'Differential Expression using a pseudobulk approach and DESeq2'
 teaching: 10
 exercises: 2
 ---
