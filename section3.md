@@ -1,5 +1,5 @@
 ---
-title: 'Section 3 : Differential Expression using a pseudobulk approach and DESeq2'
+title: 'Differential Expression using a pseudobulk approach and DESeq2'
 teaching: 10
 exercises: 2
 ---
@@ -35,7 +35,7 @@ Number of edges: 521570
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.9002
 Number of communities: 13
-Elapsed time: 1 seconds
+Elapsed time: 2 seconds
 ```
 
 ## Step 1: We need to import sample information for each cell from the original paper

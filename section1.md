@@ -1,5 +1,5 @@
 ---
-title: 'Section 1: Setup, Quality Control and Sample Integration'
+title: 'Setup, Quality Control and Sample Integration'
 teaching: 10
 exercises: 2
 ---
@@ -547,21 +547,21 @@ ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "harmony", dims = 1:20, redu
 ```
 
 ``` output
-22:27:13 UMAP embedding parameters a = 0.9922 b = 1.112
-22:27:13 Read 13548 rows and found 20 numeric columns
-22:27:13 Using Annoy for neighbor search, n_neighbors = 30
-22:27:13 Building Annoy index with metric = cosine, n_trees = 50
+06:08:48 UMAP embedding parameters a = 0.9922 b = 1.112
+06:08:48 Read 13548 rows and found 20 numeric columns
+06:08:48 Using Annoy for neighbor search, n_neighbors = 30
+06:08:48 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-22:27:14 Writing NN index file to temp file /tmp/RtmpG03a0W/file232524929c5b
-22:27:14 Searching Annoy index using 1 thread, search_k = 3000
-22:27:18 Annoy recall = 100%
-22:27:19 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-22:27:21 Initializing from normalized Laplacian + noise (using RSpectra)
-22:27:22 Commencing optimization for 200 epochs, with 586822 positive edges
-22:27:22 Using rng type: pcg
-22:27:28 Optimization finished
+06:08:49 Writing NN index file to temp file /tmp/RtmpzTsTsn/file24381bcdf338
+06:08:49 Searching Annoy index using 1 thread, search_k = 3000
+06:08:54 Annoy recall = 100%
+06:08:55 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+06:08:57 Initializing from normalized Laplacian + noise (using RSpectra)
+06:08:58 Commencing optimization for 200 epochs, with 586822 positive edges
+06:08:58 Using rng type: pcg
+06:09:04 Optimization finished
 ```
 
 ``` r
@@ -711,7 +711,7 @@ Number of edges: 521570
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.9002
 Number of communities: 13
-Elapsed time: 1 seconds
+Elapsed time: 2 seconds
 ```
 
 ``` r
