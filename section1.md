@@ -58,6 +58,25 @@ set.seed(4242) # Set Seed for Reproducibility
 
 
 
+``` error
+Error in library(DESeq2): there is no package called 'DESeq2'
+```
+
+``` error
+Error in library(metap): there is no package called 'metap'
+```
+
+``` error
+Error in library(DropletUtils): there is no package called 'DropletUtils'
+```
+
+``` error
+Error in library(SingleR): there is no package called 'SingleR'
+```
+
+``` error
+Error in library(celldex): there is no package called 'celldex'
+```
 
 We're using the ifnb public dataset provided by Seurat. This dataset
 contains PBMC data from 8 lupus patients before and after interferon
@@ -547,21 +566,21 @@ ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "harmony", dims = 1:20, redu
 ```
 
 ``` output
-00:44:41 UMAP embedding parameters a = 0.9922 b = 1.112
-00:44:41 Read 13548 rows and found 20 numeric columns
-00:44:41 Using Annoy for neighbor search, n_neighbors = 30
-00:44:41 Building Annoy index with metric = cosine, n_trees = 50
+00:38:36 UMAP embedding parameters a = 0.9922 b = 1.112
+00:38:36 Read 13548 rows and found 20 numeric columns
+00:38:36 Using Annoy for neighbor search, n_neighbors = 30
+00:38:36 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-00:44:43 Writing NN index file to temp file /tmp/RtmpKAZjB2/file272b67635406
-00:44:43 Searching Annoy index using 1 thread, search_k = 3000
-00:44:47 Annoy recall = 100%
-00:44:48 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-00:44:50 Initializing from normalized Laplacian + noise (using RSpectra)
-00:44:51 Commencing optimization for 200 epochs, with 586822 positive edges
-00:44:51 Using rng type: pcg
-00:44:57 Optimization finished
+00:38:37 Writing NN index file to temp file /tmp/Rtmp8wNgEc/file1dcc5c466342
+00:38:37 Searching Annoy index using 1 thread, search_k = 3000
+00:38:42 Annoy recall = 100%
+00:38:42 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+00:38:43 Initializing from normalized Laplacian + noise (using RSpectra)
+00:38:43 Commencing optimization for 200 epochs, with 586822 positive edges
+00:38:43 Using rng type: pcg
+00:38:49 Optimization finished
 ```
 
 ``` r
