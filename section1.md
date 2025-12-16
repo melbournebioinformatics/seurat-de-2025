@@ -566,21 +566,21 @@ ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "harmony", dims = 1:20, redu
 ```
 
 ``` output
-00:38:36 UMAP embedding parameters a = 0.9922 b = 1.112
-00:38:36 Read 13548 rows and found 20 numeric columns
-00:38:36 Using Annoy for neighbor search, n_neighbors = 30
-00:38:36 Building Annoy index with metric = cosine, n_trees = 50
+00:40:56 UMAP embedding parameters a = 0.9922 b = 1.112
+00:40:56 Read 13548 rows and found 20 numeric columns
+00:40:56 Using Annoy for neighbor search, n_neighbors = 30
+00:40:56 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-00:38:37 Writing NN index file to temp file /tmp/Rtmp8wNgEc/file1dcc5c466342
-00:38:37 Searching Annoy index using 1 thread, search_k = 3000
-00:38:42 Annoy recall = 100%
-00:38:42 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-00:38:43 Initializing from normalized Laplacian + noise (using RSpectra)
-00:38:43 Commencing optimization for 200 epochs, with 586822 positive edges
-00:38:43 Using rng type: pcg
-00:38:49 Optimization finished
+00:40:57 Writing NN index file to temp file /tmp/RtmpGxffJ1/file1dcb1052e80b
+00:40:57 Searching Annoy index using 1 thread, search_k = 3000
+00:41:01 Annoy recall = 100%
+00:41:02 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+00:41:03 Initializing from normalized Laplacian + noise (using RSpectra)
+00:41:03 Commencing optimization for 200 epochs, with 586822 positive edges
+00:41:03 Using rng type: pcg
+00:41:08 Optimization finished
 ```
 
 ``` r
@@ -670,7 +670,7 @@ tab_phase_cluster <- prop.table(table(ifnb.filtered$seurat_clusters, ifnb.filter
 ```
 
 ``` error
-Error in `x[[i, drop = TRUE]]` at SeuratObject/R/seurat.R:2939:3:
+Error in `x[[i, drop = TRUE]]` at SeuratObject/R/seurat.R:2959:3:
 ! 'seurat_clusters' not found in this Seurat object
  Did you mean "seurat_annotations"?
 ```
