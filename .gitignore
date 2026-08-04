@@ -2,7 +2,6 @@
 episodes/*html
 site/*
 !site/README.md
-renv/
 # History files
 .Rhistory
 .Rapp.history
@@ -50,4 +49,4 @@ docs/
 po/*~
 
 # renv sandbox needed for renv version 0.16.0
-renv/sandbox # OPTIONAL
+renv/sandbox/
