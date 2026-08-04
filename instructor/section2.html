@@ -361,10 +361,18 @@ overly lenient thresholds).</li>
 </div>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in `library()`:
-! there is no package called 'future'</code></pre>
+<pre class="output" tabindex="0"><code>Initializing centroids
+Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
+
+Number of nodes: 13548
+Number of edges: 522621
+
+Running Louvain algorithm...
+Maximum modularity in 10 random starts: 0.8998
+Number of communities: 14
+Elapsed time: 1 seconds</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -372,26 +380,14 @@ overly lenient thresholds).</li>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction <span class="op">=</span> <span class="st">"umap.cca"</span>, label <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `DimPlot()`:
-! could not find function "DimPlot"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb4">
+<figure><img src="../fig/section2-rendered-unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction <span class="op">=</span> <span class="st">"umap.cca"</span>, group.by <span class="op">=</span> <span class="st">"stim"</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `DimPlot()`:
-! could not find function "DimPlot"</code></pre>
-</div>
-<section><h2 class="section-heading" id="step-1--find-conserved-markers-to-label-our-celltypes">Step 1. Find Conserved Markers to label our celltypes<a class="anchor" aria-label="anchor" href="#step-1--find-conserved-markers-to-label-our-celltypes"></a></h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb6">
+<figure><img src="../fig/section2-rendered-unnamed-chunk-3-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><section><h2 class="section-heading" id="step-1--find-conserved-markers-to-label-our-celltypes">Step 1. Find Conserved Markers to label our celltypes<a class="anchor" aria-label="anchor" href="#step-1--find-conserved-markers-to-label-our-celltypes"></a></h2>
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -400,10 +396,27 @@ overly lenient thresholds).</li>
 <span>                     grouping.var <span class="op">=</span> <span class="st">'stim'</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in `FindConservedMarkers()`:
-! could not find function "FindConservedMarkers"</code></pre>
+<pre class="output" tabindex="0"><code>Testing group CTRL: (4) vs (0, 11, 2, 7, 1, 5, 9, 3, 10, 6, 12, 8, 13)</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>For a (much!) faster implementation of the Wilcoxon Rank Sum Test,
+(default method for FindMarkers) please install the presto package
+--------------------------------------------
+install.packages('devtools')
+devtools::install_github('immunogenomics/presto')
+--------------------------------------------
+After installation of presto, Seurat will automatically use the more
+efficient implementation (no further action necessary).
+This message will be shown once per session</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Testing group STIM: (4) vs (5, 11, 1, 3, 0, 7, 10, 2, 6, 8, 9, 12, 13)</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -412,10 +425,29 @@ overly lenient thresholds).</li>
 <code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="va">markers.cluster.4</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'markers.cluster.4' not found</code></pre>
+<pre class="output" tabindex="0"><code>          CTRL_p_val CTRL_avg_log2FC CTRL_pct.1 CTRL_pct.2 CTRL_p_val_adj
+VMO1    0.000000e+00        6.026711      0.847      0.060   0.000000e+00
+FCGR3A  0.000000e+00        4.125484      0.980      0.204   0.000000e+00
+MS4A7   0.000000e+00        3.734172      0.957      0.196   0.000000e+00
+CXCL16  0.000000e+00        2.932263      0.951      0.234   0.000000e+00
+MS4A4A  0.000000e+00        5.165917      0.586      0.025   0.000000e+00
+LST1   4.287172e-287        2.857912      0.929      0.251  6.024762e-283
+       STIM_p_val STIM_avg_log2FC STIM_pct.1 STIM_pct.2 STIM_p_val_adj
+VMO1            0        7.591415      0.724      0.022              0
+FCGR3A          0        5.122968      0.990      0.128              0
+MS4A7           0        3.919094      0.992      0.220              0
+CXCL16          0        3.855864      0.923      0.148              0
+MS4A4A          0        4.804485      0.900      0.073              0
+LST1            0        3.062274      0.889      0.193              0
+            max_pval minimump_p_val
+VMO1    0.000000e+00              0
+FCGR3A  0.000000e+00              0
+MS4A7   0.000000e+00              0
+CXCL16  0.000000e+00              0
+MS4A4A  0.000000e+00              0
+LST1   4.287172e-287              0</code></pre>
 </div>
 <p>Let’s visualise the top upregulated, conserved between condition,
 marker genes identified in cluster 4 using the
@@ -440,83 +472,43 @@ min.cutoff, or changing the value of the min.cutoff parameter.</p>
 <span><span class="fu">FeaturePlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction <span class="op">=</span> <span class="st">"umap.cca"</span>, </span>
 <span>            features <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">'VMO1'</span>, <span class="st">'FCGR3A'</span>, <span class="st">'MS4A7'</span>, <span class="st">'CXCL16'</span><span class="op">)</span>, min.cutoff <span class="op">=</span> <span class="st">'q10'</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `FeaturePlot()`:
-! could not find function "FeaturePlot"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb12">
+<figure><img src="../fig/section2-rendered-unnamed-chunk-5-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># I happen to know that the cells in cluster 4 are CD16 monocytes - lets rename this cluster</span></span>
 <span><span class="co"># Idents(ifnb.filtered) # Let's look at the identities of our cells at the moment</span></span></code></pre>
 </div>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ifnb.filtered</span> <span class="op">&lt;-</span> <span class="fu">RenameIdents</span><span class="op">(</span><span class="va">ifnb.filtered</span>, <span class="st">'4'</span> <span class="op">=</span> <span class="st">'CD16 Mono'</span><span class="op">)</span> <span class="co"># Let's rename cells in cluster 4 with a new cell type label</span></span>
+<span><span class="co"># Idents(ifnb.filtered) # we can take a look at the cell identities again</span></span></code></pre>
+</div>
 <div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ifnb.filtered</span> <span class="op">&lt;-</span> <span class="fu">RenameIdents</span><span class="op">(</span><span class="va">ifnb.filtered</span>, <span class="st">'4'</span> <span class="op">=</span> <span class="st">'CD16 Mono'</span><span class="op">)</span> <span class="co"># Let's rename cells in cluster 4 with a new cell type label</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `RenameIdents()`:
-! could not find function "RenameIdents"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb15">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Idents(ifnb.filtered) # we can take a look at the cell identities again</span></span></code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction <span class="op">=</span> <span class="st">"umap.cca"</span>, label <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"After changing the identity of cluster 4"</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `DimPlot()`:
-! could not find function "DimPlot"</code></pre>
-</div>
-</section><section><h2 class="section-heading" id="step-2-set-the-identity-of-our-clusters-to-the-annotations-provided">Step 2: Set the identity of our clusters to the annotations
+<figure><img src="../fig/section2-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="step-2-set-the-identity-of-our-clusters-to-the-annotations-provided">Step 2: Set the identity of our clusters to the annotations
 provided<a class="anchor" aria-label="anchor" href="#step-2-set-the-identity-of-our-clusters-to-the-annotations-provided"></a></h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb18">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">Idents</span><span class="op">(</span><span class="va">ifnb.filtered</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ifnb.filtered</span><span class="op">@</span><span class="va">meta.data</span><span class="op">$</span><span class="va">seurat_annotations</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">Idents</span><span class="op">(</span><span class="va">ifnb.filtered</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ifnb.filtered</span><span class="op">@</span><span class="va">meta.data</span><span class="op">$</span><span class="va">seurat_annotations</span></span>
+<span><span class="co"># Idents(ifnb.filtered)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'ifnb.filtered' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb20">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Idents(ifnb.filtered)</span></span></code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction <span class="op">=</span> <span class="st">"umap.cca"</span>, label <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `DimPlot()`:
-! could not find function "DimPlot"</code></pre>
-</div>
-<div id="callout1" class="callout">
+<figure><img src="../fig/section2-rendered-unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -549,221 +541,81 @@ detail in the Intro to scRNA-seq workshop material.</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load reference data </span></span>
 <span><span class="co"># Blood &amp; immune lineages</span></span>
-<span><span class="va">ref.set</span> <span class="op">&lt;-</span> <span class="fu">celldex</span><span class="fu">::</span><span class="fu">BlueprintEncodeData</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `loadNamespace()`:
-! there is no package called 'celldex'</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb25">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ifnb.v4</span> <span class="op">&lt;-</span> <span class="fu">JoinLayers</span><span class="op">(</span><span class="va">ifnb.filtered</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `JoinLayers()`:
-! could not find function "JoinLayers"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb27">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sce.ifnb.filtered</span> <span class="op">&lt;-</span> <span class="fu">as.SingleCellExperiment</span><span class="op">(</span><span class="va">ifnb.v4</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `as.SingleCellExperiment()`:
-! could not find function "as.SingleCellExperiment"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb29">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sce.ifnb.filtered</span> <span class="op">&lt;-</span> <span class="fu">logNormCounts</span><span class="op">(</span><span class="va">sce.ifnb.filtered</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `logNormCounts()`:
-! could not find function "logNormCounts"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb31">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pred.cnts</span> <span class="op">&lt;-</span> <span class="fu">SingleR</span><span class="op">(</span></span>
+<span><span class="va">ref.set</span> <span class="op">&lt;-</span> <span class="fu">celldex</span><span class="fu">::</span><span class="fu">BlueprintEncodeData</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ifnb.v4</span> <span class="op">&lt;-</span> <span class="fu">JoinLayers</span><span class="op">(</span><span class="va">ifnb.filtered</span><span class="op">)</span></span>
+<span><span class="va">sce.ifnb.filtered</span> <span class="op">&lt;-</span> <span class="fu">as.SingleCellExperiment</span><span class="op">(</span><span class="va">ifnb.v4</span><span class="op">)</span></span>
+<span><span class="va">sce.ifnb.filtered</span> <span class="op">&lt;-</span> <span class="fu">logNormCounts</span><span class="op">(</span><span class="va">sce.ifnb.filtered</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pred.cnts</span> <span class="op">&lt;-</span> <span class="fu">SingleR</span><span class="op">(</span></span>
 <span>  test <span class="op">=</span> <span class="va">sce.ifnb.filtered</span>,</span>
 <span>  ref <span class="op">=</span> <span class="va">ref.set</span>,</span>
 <span>  labels <span class="op">=</span> <span class="va">ref.set</span><span class="op">$</span><span class="va">label.main</span></span>
-<span><span class="op">)</span></span></code></pre>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">lbls.keep</span> <span class="op">&lt;-</span> <span class="fu">table</span><span class="op">(</span><span class="va">pred.cnts</span><span class="op">$</span><span class="va">labels</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">10</span></span>
+<span><span class="co"># Add SingleR labels to Seurat metadata</span></span>
+<span><span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">SingleR.labels</span> <span class="op">&lt;-</span> <span class="va">sce.ifnb.filtered</span><span class="op">$</span><span class="va">SingleR.labels</span></span>
+<span><span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">SingleR.labels</span> <span class="op">&lt;-</span> <span class="fu">ifelse</span><span class="op">(</span><span class="va">lbls.keep</span><span class="op">[</span><span class="va">pred.cnts</span><span class="op">$</span><span class="va">labels</span><span class="op">]</span>, <span class="va">pred.cnts</span><span class="op">$</span><span class="va">labels</span>, <span class="st">'Other'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run UMAP (based on PCA)</span></span>
+<span><span class="va">ifnb.filtered</span> <span class="op">&lt;-</span> <span class="fu">RunUMAP</span><span class="op">(</span><span class="va">ifnb.filtered</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction<span class="op">=</span><span class="st">'umap.cca'</span>, group.by<span class="op">=</span><span class="st">'SingleR.labels'</span>,  label <span class="op">=</span> <span class="cn">TRUE</span>, label.size <span class="op">=</span> <span class="fl">3</span> <span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `SingleR()`:
-! could not find function "SingleR"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb33">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lbls.keep</span> <span class="op">&lt;-</span> <span class="fu">table</span><span class="op">(</span><span class="va">pred.cnts</span><span class="op">$</span><span class="va">labels</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">10</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'pred.cnts' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb35">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Add SingleR labels to Seurat metadata</span></span>
-<span><span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">SingleR.labels</span> <span class="op">&lt;-</span> <span class="va">sce.ifnb.filtered</span><span class="op">$</span><span class="va">SingleR.labels</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'sce.ifnb.filtered' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb37">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">SingleR.labels</span> <span class="op">&lt;-</span> <span class="fu">ifelse</span><span class="op">(</span><span class="va">lbls.keep</span><span class="op">[</span><span class="va">pred.cnts</span><span class="op">$</span><span class="va">labels</span><span class="op">]</span>, <span class="va">pred.cnts</span><span class="op">$</span><span class="va">labels</span>, <span class="st">'Other'</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'lbls.keep' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb39">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Run UMAP (based on PCA)</span></span>
-<span><span class="va">ifnb.filtered</span> <span class="op">&lt;-</span> <span class="fu">RunUMAP</span><span class="op">(</span><span class="va">ifnb.filtered</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `RunUMAP()`:
-! could not find function "RunUMAP"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb41">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction<span class="op">=</span><span class="st">'umap.cca'</span>, group.by<span class="op">=</span><span class="st">'SingleR.labels'</span>,  label <span class="op">=</span> <span class="cn">TRUE</span>, label.size <span class="op">=</span> <span class="fl">3</span> <span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `DimPlot()`:
-! could not find function "DimPlot"</code></pre>
-</div>
-</div>
+<figure><img src="../fig/section2-rendered-unnamed-chunk-11-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="step-3-find-differentially-expressed-genes-degs-between-our-two-conditions-using-cd16-mono-cells-as-an-example">Step 3: Find differentially expressed genes (DEGs) between our two
 conditions, using CD16 Mono cells as an example<a class="anchor" aria-label="anchor" href="#step-3-find-differentially-expressed-genes-degs-between-our-two-conditions-using-cd16-mono-cells-as-an-example"></a></h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb43">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Make another column in metadata showing what cells belong to each treatment group (This will make more sense in a bit)</span></span>
-<span><span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">celltype.and.stim</span> <span class="op">&lt;-</span> <span class="fu">paste0</span><span class="op">(</span><span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">seurat_annotations</span>, <span class="st">'_'</span>, <span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">stim</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'ifnb.filtered' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb45">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># (ifnb.filtered@meta.data)</span></span>
+<span><span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">celltype.and.stim</span> <span class="op">&lt;-</span> <span class="fu">paste0</span><span class="op">(</span><span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">seurat_annotations</span>, <span class="st">'_'</span>, <span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">stim</span><span class="op">)</span></span>
+<span><span class="co"># (ifnb.filtered@meta.data)</span></span>
 <span></span>
-<span><span class="fu">Idents</span><span class="op">(</span><span class="va">ifnb.filtered</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">celltype.and.stim</span></span></code></pre>
+<span><span class="fu">Idents</span><span class="op">(</span><span class="va">ifnb.filtered</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">ifnb.filtered</span><span class="op">$</span><span class="va">celltype.and.stim</span></span>
+<span></span>
+<span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction <span class="op">=</span> <span class="st">"umap.cca"</span>, label <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="co"># each cluster is now made up of two labels (control or stimulated)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'ifnb.filtered' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb47">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction <span class="op">=</span> <span class="st">"umap.cca"</span>, label <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="co"># each cluster is now made up of two labels (control or stimulated)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `DimPlot()`:
-! could not find function "DimPlot"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb49">
+<figure><img src="../fig/section2-rendered-unnamed-chunk-12-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">DimPlot</span><span class="op">(</span><span class="va">ifnb.filtered</span>, reduction <span class="op">=</span> <span class="st">"umap.cca"</span>, </span>
 <span>        label <span class="op">=</span> <span class="cn">T</span>, split.by <span class="op">=</span> <span class="st">"stim"</span><span class="op">)</span> <span class="co"># Lets separate by condition to see what we've done a bit more clearly</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `DimPlot()`:
-! could not find function "DimPlot"</code></pre>
-</div>
-<p>We’ll now leverage these new identities to compare DEGs between our
+<figure><img src="../fig/section2-rendered-unnamed-chunk-13-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We’ll now leverage these new identities to compare DEGs between our
 treatment groups</p>
-<div class="codewrapper sourceCode" id="cb51">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">treatment.response.CD16</span> <span class="op">&lt;-</span> <span class="fu">FindMarkers</span><span class="op">(</span><span class="va">ifnb.filtered</span>, ident.1 <span class="op">=</span> <span class="st">'CD16 Mono_STIM'</span>, </span>
-<span>                                       ident.2 <span class="op">=</span> <span class="st">'CD16 Mono_CTRL'</span><span class="op">)</span></span></code></pre>
+<span>                                       ident.2 <span class="op">=</span> <span class="st">'CD16 Mono_CTRL'</span><span class="op">)</span></span>
+<span><span class="fu">head</span><span class="op">(</span><span class="va">treatment.response.CD16</span><span class="op">)</span> <span class="co"># These are the genes that are upregulated in the stimulated versus control group</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in `FindMarkers()`:
-! could not find function "FindMarkers"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb53">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="va">treatment.response.CD16</span><span class="op">)</span> <span class="co"># These are the genes that are upregulated in the stimulated versus control group</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'treatment.response.CD16' not found</code></pre>
+<pre class="output" tabindex="0"><code>               p_val avg_log2FC pct.1 pct.2     p_val_adj
+IFIT1  1.379187e-176   5.834216 1.000 0.094 1.938172e-172
+ISG15  6.273887e-166   5.333771 1.000 0.478 8.816694e-162
+IFIT3  1.413978e-164   4.412990 0.992 0.314 1.987063e-160
+ISG20  6.983755e-164   4.088510 1.000 0.448 9.814270e-160
+IFITM3 1.056793e-161   3.191513 1.000 0.634 1.485111e-157
+IFIT2  7.334976e-159   4.622453 0.974 0.162 1.030784e-154</code></pre>
 </div>
 </section><section><h2 class="section-heading" id="step-4-lets-plot-conserved-features-vs-degs-between-conditions">Step 4: Lets plot conserved features vs DEGs between conditions<a class="anchor" aria-label="anchor" href="#step-4-lets-plot-conserved-features-vs-degs-between-conditions"></a></h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb55">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -771,15 +623,9 @@ treatment groups</p>
 <span>            features <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">'VMO1'</span>, <span class="st">'FCGR3A'</span>, <span class="st">'IFIT1'</span>, <span class="st">'ISG15'</span><span class="op">)</span>,</span>
 <span>            split.by <span class="op">=</span> <span class="st">'stim'</span>, min.cutoff <span class="op">=</span> <span class="st">'q10'</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `FeaturePlot()`:
-! could not find function "FeaturePlot"</code></pre>
-</div>
-</section><section><h2 class="section-heading" id="step-5-create-a-heatmap-to-visualise-degs-between-our-two-conditions-cell-types">Step 5: Create a Heatmap to visualise DEGs between our two
+<figure><img src="../fig/section2-rendered-unnamed-chunk-15-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="step-5-create-a-heatmap-to-visualise-degs-between-our-two-conditions-cell-types">Step 5: Create a Heatmap to visualise DEGs between our two
 conditions + cell types<a class="anchor" aria-label="anchor" href="#step-5-create-a-heatmap-to-visualise-degs-between-our-two-conditions-cell-types"></a></h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb57">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -787,13 +633,7 @@ conditions + cell types<a class="anchor" aria-label="anchor" href="#step-5-creat
 <span><span class="va">ifnb.treatVsCtrl.markers</span> <span class="op">&lt;-</span> <span class="fu">FindAllMarkers</span><span class="op">(</span><span class="va">ifnb.filtered</span>,</span>
 <span>                                          only.pos <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `FindAllMarkers()`:
-! could not find function "FindAllMarkers"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb59">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -805,7 +645,7 @@ rds file of the output using the code below:</p>
 interpret sometimes (we’ll learn how to make better and clearer custom
 heatmaps using the pheatmap package from our Seurat expression data
 later on).</p>
-<div class="codewrapper sourceCode" id="cb60">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -815,41 +655,14 @@ later on).</p>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">cluster</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">avg_log2FC</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">slice_head</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DEG.heatmap</span> <span class="op">&lt;-</span> <span class="fu">DoHeatmap</span><span class="op">(</span><span class="va">ifnb.filtered</span>, features <span class="op">=</span> <span class="va">top5</span><span class="op">$</span><span class="va">gene</span>,</span>
+<span>          label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">DEG.heatmap</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `ifnb.treatVsCtrl.markers %&gt;% group_by(cluster) %&gt;% dplyr::filter(avg_log2FC &gt; 1) %&gt;%
-    slice_head(n = 5) %&gt;% ungroup()`:
-! could not find function "%&gt;%"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb62">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">DEG.heatmap</span> <span class="op">&lt;-</span> <span class="fu">DoHeatmap</span><span class="op">(</span><span class="va">ifnb.filtered</span>, features <span class="op">=</span> <span class="va">top5</span><span class="op">$</span><span class="va">gene</span>,</span>
-<span>          label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in `DoHeatmap()`:
-! could not find function "DoHeatmap"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb64">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">DEG.heatmap</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error:
-! object 'DEG.heatmap' not found</code></pre>
-</div>
-<div id="keypoints1" class="callout keypoints">
+<figure><img src="../fig/section2-rendered-unnamed-chunk-18-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -907,7 +720,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors.</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a> Custom fork by <a href="https://www.melbournebioinformatics.org.au/" class="external-link">Melbourne Bioinformatics</a>.</p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.20.2" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/melbournebioinformatics/uom-varnish/tree/main" class="external-link">varnish (1.1.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/melbournebioinformatics/uom-varnish/tree/main" class="external-link">varnish (1.1.3)</a></p>
 		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
