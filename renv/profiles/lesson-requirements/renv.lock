@@ -19,5 +19,13 @@
   "Bioconductor": {
     "Version": "3.23"
   },
-  "Packages": {}
+  "Packages": {
+    "renv": {
+      "Package": "renv",
+      "Version": "1.2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": []
+    }
+  }
 }
