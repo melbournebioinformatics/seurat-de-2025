@@ -51,7 +51,7 @@ library(harmony)
 library(DropletUtils)
 library(ggplot2)
 library(SingleR)
-library(Celldex)
+library(celldex)
 
 set.seed(4242) # Set Seed for Reproducibility
 ```
