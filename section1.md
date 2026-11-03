@@ -558,21 +558,21 @@ ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "harmony", dims = 1:20, redu
 ```
 
 ``` output
-05:40:29 UMAP embedding parameters a = 0.9922 b = 1.112
-05:40:29 Read 13548 rows and found 20 numeric columns
-05:40:29 Using Annoy for neighbor search, n_neighbors = 30
-05:40:29 Building Annoy index with metric = cosine, n_trees = 50
+01:30:41 UMAP embedding parameters a = 0.9922 b = 1.112
+01:30:41 Read 13548 rows and found 20 numeric columns
+01:30:41 Using Annoy for neighbor search, n_neighbors = 30
+01:30:41 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-05:40:30 Writing NN index file to temp file /tmp/Rtmp62LOSG/file8dc18360244
-05:40:30 Searching Annoy index using 1 thread, search_k = 3000
-05:40:34 Annoy recall = 100%
-05:40:35 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-05:40:37 Initializing from normalized Laplacian + noise (using RSpectra)
-05:40:38 Commencing optimization for 200 epochs, with 584910 positive edges
-05:40:38 Using rng type: pcg
-05:40:42 Optimization finished
+01:30:42 Writing NN index file to temp file /tmp/RtmpI9SN2Z/filedb805a8f4406
+01:30:42 Searching Annoy index using 1 thread, search_k = 3000
+01:30:45 Annoy recall = 100%
+01:30:47 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+01:30:50 Initializing from normalized Laplacian + noise (using RSpectra)
+01:30:50 Commencing optimization for 200 epochs, with 584910 positive edges
+01:30:50 Using rng type: pcg
+01:30:55 Optimization finished
 ```
 
 ``` r
@@ -662,7 +662,7 @@ tab_phase_cluster <- prop.table(table(ifnb.filtered$seurat_clusters, ifnb.filter
 ```
 
 ``` error
-Error in `x[[i, drop = TRUE]]`:
+Error in `x[[i, drop = TRUE]]` at SeuratObject/R/seurat.R:2974:3:
 ! 'seurat_clusters' not found in this Seurat object
  Did you mean "seurat_annotations"?
 ```
