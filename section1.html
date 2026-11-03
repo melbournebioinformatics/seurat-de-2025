@@ -307,13 +307,13 @@ method</a></li>
           Previous: Introduction
         </a>
         <a class="chapter-link float-end" href="section2.html" rel="next">
-          Next: Differential Gene...
+          Next: Differential Gene Expression when...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Setup, Quality Control and Sample Integration</h1>
-        <p>Last updated on 2026-08-04 |
+        <p>Last updated on 2026-11-03 |
 
         <a href="https://github.com/melbournebioinformatics/seurat-de-2025/edit/main/episodes/section1.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -942,21 +942,21 @@ Harmony converged after 9 iterations</code></pre>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>05:40:29 UMAP embedding parameters a = 0.9922 b = 1.112
-05:40:29 Read 13548 rows and found 20 numeric columns
-05:40:29 Using Annoy for neighbor search, n_neighbors = 30
-05:40:29 Building Annoy index with metric = cosine, n_trees = 50
+<pre class="output" tabindex="0"><code>01:30:41 UMAP embedding parameters a = 0.9922 b = 1.112
+01:30:41 Read 13548 rows and found 20 numeric columns
+01:30:41 Using Annoy for neighbor search, n_neighbors = 30
+01:30:41 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-05:40:30 Writing NN index file to temp file /tmp/Rtmp62LOSG/file8dc18360244
-05:40:30 Searching Annoy index using 1 thread, search_k = 3000
-05:40:34 Annoy recall = 100%
-05:40:35 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-05:40:37 Initializing from normalized Laplacian + noise (using RSpectra)
-05:40:38 Commencing optimization for 200 epochs, with 584910 positive edges
-05:40:38 Using rng type: pcg
-05:40:42 Optimization finished</code></pre>
+01:30:42 Writing NN index file to temp file /tmp/RtmpI9SN2Z/filedb805a8f4406
+01:30:42 Searching Annoy index using 1 thread, search_k = 3000
+01:30:45 Annoy recall = 100%
+01:30:47 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+01:30:50 Initializing from normalized Laplacian + noise (using RSpectra)
+01:30:50 Commencing optimization for 200 epochs, with 584910 positive edges
+01:30:50 Using rng type: pcg
+01:30:55 Optimization finished</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1065,7 +1065,7 @@ be the same or different?</p>
 <div class="codewrapper">
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in `x[[i, drop = TRUE]]`:
+<pre class="error" tabindex="0"><code>Error in `x[[i, drop = TRUE]]` at SeuratObject/R/seurat.R:2974:3:
 ! 'seurat_clusters' not found in this Seurat object
  Did you mean "seurat_annotations"?</code></pre>
 </div>
@@ -1227,7 +1227,7 @@ any links that you are not going to use.
           Previous: Introduction
         </a>
         <a class="chapter-link float-end" href="section2.html" rel="next">
-          Next: Differential Gene...
+          Next: Differential Gene Expression when...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -1253,7 +1253,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors.</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a> Custom fork by <a href="https://www.melbournebioinformatics.org.au/" class="external-link">Melbourne Bioinformatics</a>.</p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/melbournebioinformatics/uom-varnish/tree/main" class="external-link">varnish (1.1.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.21.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/melbournebioinformatics/uom-varnish/tree/main" class="external-link">varnish (1.1.3)</a></p>
 		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1275,8 +1275,8 @@ any links that you are not going to use.
   "url": "melbournebioinformatics.github.io/uom-varnish/section1.html",
   "identifier": "melbournebioinformatics.github.io/uom-varnish/section1.html",
   "dateCreated": "2025-11-01",
-  "dateModified": "2026-08-04",
-  "datePublished": "2026-08-18"
+  "dateModified": "2026-11-03",
+  "datePublished": "2026-11-03"
 }
 
   </script><script>
