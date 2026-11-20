@@ -471,18 +471,18 @@ print(cbind(PC=1:20, r_S=round(pc_cor_S,3), r_G2M=round(pc_cor_G2M,3)))
  [5,]  5 -0.003  0.015
  [6,]  6 -0.003  0.090
  [7,]  7  0.045  0.038
- [8,]  8 -0.007  0.010
- [9,]  9 -0.014  0.012
+ [8,]  8  0.007 -0.010
+ [9,]  9  0.014 -0.012
 [10,] 10  0.021  0.061
-[11,] 11 -0.006  0.064
+[11,] 11  0.006 -0.064
 [12,] 12 -0.008  0.008
-[13,] 13 -0.031 -0.042
-[14,] 14  0.008 -0.027
-[15,] 15  0.011  0.015
-[16,] 16  0.014  0.007
-[17,] 17 -0.010  0.011
+[13,] 13  0.031  0.042
+[14,] 14 -0.008  0.027
+[15,] 15 -0.011 -0.015
+[16,] 16 -0.014 -0.007
+[17,] 17  0.010 -0.011
 [18,] 18  0.009  0.006
-[19,] 19 -0.003 -0.027
+[19,] 19  0.003  0.027
 [20,] 20 -0.015  0.026
 ```
 
@@ -558,21 +558,21 @@ ifnb.filtered <- RunUMAP(ifnb.filtered, reduction = "harmony", dims = 1:20, redu
 ```
 
 ``` output
-01:32:09 UMAP embedding parameters a = 0.9922 b = 1.112
-01:32:09 Read 13548 rows and found 20 numeric columns
-01:32:09 Using Annoy for neighbor search, n_neighbors = 30
-01:32:09 Building Annoy index with metric = cosine, n_trees = 50
+04:13:50 UMAP embedding parameters a = 0.9922 b = 1.112
+04:13:50 Read 13548 rows and found 20 numeric columns
+04:13:50 Using Annoy for neighbor search, n_neighbors = 30
+04:13:50 Building Annoy index with metric = cosine, n_trees = 50
 0%   10   20   30   40   50   60   70   80   90   100%
 [----|----|----|----|----|----|----|----|----|----|
 **************************************************|
-01:32:09 Writing NN index file to temp file /tmp/RtmpHAmrCJ/filedb4f41b904f1
-01:32:09 Searching Annoy index using 1 thread, search_k = 3000
-01:32:13 Annoy recall = 100%
-01:32:14 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
-01:32:17 Initializing from normalized Laplacian + noise (using RSpectra)
-01:32:17 Commencing optimization for 200 epochs, with 584910 positive edges
-01:32:17 Using rng type: pcg
-01:32:22 Optimization finished
+04:13:51 Writing NN index file to temp file /tmp/RtmpOj5cQS/filed97d7b35f36e
+04:13:51 Searching Annoy index using 1 thread, search_k = 3000
+04:13:54 Annoy recall = 100%
+04:13:55 Commencing smooth kNN distance calibration using 1 thread with target n_neighbors = 30
+04:13:58 Initializing from normalized Laplacian + noise (using RSpectra)
+04:13:58 Commencing optimization for 200 epochs, with 584902 positive edges
+04:13:58 Using rng type: pcg
+04:14:04 Optimization finished
 ```
 
 ``` r
